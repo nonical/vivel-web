@@ -6,10 +6,10 @@ interface PillProps {
   label: string;
 }
 
-export const Pill = ({ backgroundColor, label }: PillProps) => {
+export default function Pill({ backgroundColor, label }: PillProps) {
   return (
     <div className={"pill"} style={{ backgroundColor: backgroundColor }}>
       <span className={"pill-content"}>{label}</span>
     </div>
   );
-};
+}

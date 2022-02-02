@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { Pill } from "../../components/Pill/Pill";
+import Pill from "../../components/Pill";
 
 export default {
   title: "Example/Pill",
