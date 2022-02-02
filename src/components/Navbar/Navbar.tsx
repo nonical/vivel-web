@@ -1,6 +1,6 @@
 import React from "react";
 import Pill from "../Pill";
-import Action from "./Action";
+import Action from "../Action";
 import "./navbar.css";
 import { ReactComponent as Heart } from "../../assets/heart.svg";
 import { ReactComponent as PieChart } from "../../assets/pie-chart.svg";
