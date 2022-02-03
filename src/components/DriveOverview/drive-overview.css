@@ -1,0 +1,41 @@
+.drive-overview-container {
+  width: 100%;
+  height: 250px;
+  border-radius: 10px;
+}
+
+.drive-overview-row {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 125px;
+  width: 100%;
+}
+
+.drive-overview-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drive-overview-number {
+  color: #ff98a8;
+  font-weight: 600;
+  font-size: 80px;
+}
+
+.drive-overview-text {
+  margin-left: 20px;
+  font-weight: 600;
+  font-size: 30px;
+  width: 10%;
+}
+.drive-overview-date {
+  height: 100%;
+  width: 66%;
+}
+
+.drive-overview-third {
+  height: 100%;
+  width: 33%;
+}
