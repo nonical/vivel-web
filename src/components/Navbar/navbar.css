@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  height: 80px;
+  background-color: white;
+  align-items: center;
+}
+
+.pill-container {
+  width: 33%;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 33%;
+}
