@@ -1,5 +1,5 @@
 const DropdownStyles = {
-  control: (provided, state) => ({
+  control: (provided: any, state: any) => ({
     ...provided,
     borderColor: "#FF98A8",
     boxShadow: "0",
@@ -8,7 +8,7 @@ const DropdownStyles = {
     },
     color: "#FF98A8",
   }),
-  option: (provided, state) => ({
+  option: (provided: any, state: { isSelected: any }) => ({
     ...provided,
     "&:hover": {
       color: "#FF98A8",
@@ -26,11 +26,11 @@ const DropdownStyles = {
     color: state.isSelected ? "#FF98A8" : "",
     borderRadius: 4,
   }),
-  listBox: (provided, state) => ({
+  listBox: (provided: any, state: any) => ({
     ...provided,
     margin: 0,
   }),
-  menuList: (provided, state) => ({
+  menuList: (provided: any, state: any) => ({
     ...provided,
     padding: 0,
     borderColor: "#FF98A8",
@@ -39,7 +39,7 @@ const DropdownStyles = {
   indicatorSeparator: () => ({
     display: "none",
   }),
-  singleValue: (provided, state) => ({
+  singleValue: (provided: any, state: any) => ({
     ...provided,
     color: "#FF98A8",
   }),
