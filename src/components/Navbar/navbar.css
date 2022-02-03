@@ -15,3 +15,13 @@
   justify-content: center;
   width: 33%;
 }
+
+@media (max-width: 640px) {
+  .pill-container {
+    display: none;
+  }
+
+  .actions {
+    width: 100%;
+  }
+}
