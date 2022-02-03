@@ -20,12 +20,12 @@ export default function Navbar() {
       <div className={"actions"}>
         <Action
           Icon={Heart}
-          styles={{ stroke: "#FF98A8", marginRight: 5 }}
+          iconStyles={{ stroke: "#FF98A8", marginRight: 5 }}
           title={"Drives"}
         />
         <Action
           Icon={PieChart}
-          styles={{ stroke: "#FF98A8", marginRight: 5 }}
+          iconStyles={{ stroke: "#FF98A8", marginRight: 5 }}
           title={"Reports"}
         />
       </div>
