@@ -3,9 +3,9 @@ import Input from "../../Input";
 import Dropdown from "../../Dropdown";
 import Switch from "../../Switch";
 import Button from "../../Button";
-import "./new-donation.css";
+import "./new-drive.css";
 
-export default function NewDonation() {
+export default function NewDrive() {
   const options = [
     { value: "O+", label: "O+" },
     { value: "O-", label: "O-" },
@@ -18,7 +18,7 @@ export default function NewDonation() {
   ];
   return (
     <div className={"modal-container"}>
-      <div className={"modal-title"}>New Donation</div>
+      <div className={"modal-title"}>New Drive</div>
       <div className={"input-container"}>
         <Input
           label={"Blood amount"}
