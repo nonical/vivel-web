@@ -19,5 +19,6 @@ Primary.args = {
     { value: "1", label: "second" },
     { value: "2", label: "last" },
   ],
+  label: "Label",
   placeHolder: "Select donation status",
 };

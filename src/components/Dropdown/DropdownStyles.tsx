@@ -7,6 +7,7 @@ const DropdownStyles = {
       borderColor: "#FF98A8",
     },
     color: "#FF98A8",
+    minHeight: "50px",
   }),
   option: (provided: any, state: { isSelected: any }) => ({
     ...provided,
@@ -42,6 +43,11 @@ const DropdownStyles = {
   singleValue: (provided: any, state: any) => ({
     ...provided,
     color: "#FF98A8",
+  }),
+  container: (provided: any, state: any) => ({
+    ...provided,
+    minWidth: "325px",
+    minHeight: "50px",
   }),
 };
 

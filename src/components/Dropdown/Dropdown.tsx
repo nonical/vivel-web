@@ -1,6 +1,7 @@
 import React from "react";
 import Select from "react-select";
 import DropdownStyles from "./DropdownStyles";
+import "./dropdown.css";
 
 interface Option {
   value: string;
@@ -10,15 +11,23 @@ interface Option {
 interface DropdownProps {
   options: Option[];
   placeHolder: string;
+  label: string;
 }
 
-export default function Dropdown({ options, placeHolder }: DropdownProps) {
+export default function Dropdown({
+  options,
+  label,
+  placeHolder,
+}: DropdownProps) {
   return (
-    <Select
-      options={options}
-      isSearchable={false}
-      styles={DropdownStyles}
-      placeholder={placeHolder}
-    />
+    <div>
+      <span className={"select-label"}>{label}</span>
+      <Select
+        options={options}
+        isSearchable={false}
+        styles={DropdownStyles}
+        placeholder={placeHolder}
+      />
+    </div>
   );
 }

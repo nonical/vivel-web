@@ -1,0 +1,13 @@
+.select-label {
+  left: 0px;
+  top: 0px;
+  display: block;
+  margin-bottom: 15px;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+
+  color: #151522;
+}

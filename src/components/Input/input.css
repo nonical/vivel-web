@@ -1,6 +1,6 @@
 .main {
   position: relative;
-  max-width: 325px;
+  min-width: 325px;
 }
 
 .main label {
