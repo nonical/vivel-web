@@ -15,7 +15,7 @@ export default function TextInput({
   return (
     <div className="main">
       {label && <label htmlFor={name}>{label}</label>}
-      <textarea id={name} placeholder={placeholder} />
+      <textarea id={name} name={name} placeholder={placeholder} />
     </div>
   );
 }

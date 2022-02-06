@@ -83,7 +83,7 @@ export default function Drive(props: DriveProps) {
           />
           <span className={"switch-label"}>Urgent</span>
         </div>
-        <div className={"input-container"}>
+        <div className={"input-container submit-button"}>
           <Button label={"Create"} onClick={handleSubmit} />
         </div>
       </div>
