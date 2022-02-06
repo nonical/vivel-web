@@ -5,43 +5,32 @@ import Switch from "../../Switch";
 import Button from "../../Button";
 import "./new-donation.css";
 
-interface Option {
-  value: string;
-  label: string;
-}
-
-interface NewDonationProps {
-  selectOptions: Option[];
-  selectLabel: string;
-  selectPlaceholder: string;
-  inputLabel: string;
-  inputName: string;
-  inputPlaceHolder: string;
-}
-
-export default function NewDonation({
-  selectOptions,
-  selectLabel,
-  selectPlaceholder,
-  inputLabel,
-  inputName,
-  inputPlaceHolder,
-}: NewDonationProps) {
+export default function NewDonation() {
+  const options = [
+    { value: "O+", label: "O+" },
+    { value: "O-", label: "O-" },
+    { value: "A+", label: "A+" },
+    { value: "A-", label: "A-" },
+    { value: "B+", label: "B+" },
+    { value: "B-", label: "B-" },
+    { value: "AB+", label: "AB+" },
+    { value: "AB-", label: "AB-" },
+  ];
   return (
     <div className={"modal-container"}>
       <div className={"modal-title"}>New Donation</div>
       <div className={"input-container"}>
         <Input
-          label={inputLabel}
-          name={inputName}
-          placeholder={inputPlaceHolder}
+          label={"Blood amount"}
+          name={"blood-amount"}
+          placeholder={"type here..."}
         />
       </div>
       <div className={"input-container"}>
         <Dropdown
-          options={selectOptions}
-          label={selectLabel}
-          placeHolder={selectPlaceholder}
+          options={options}
+          label={"Blood type"}
+          placeHolder={"Select blood type"}
         />
       </div>
       <div className={"switch-container"}>
