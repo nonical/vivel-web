@@ -2,6 +2,7 @@ import React from "react";
 import Input from "../../Input";
 import Dropdown from "../../Dropdown";
 import Switch from "../../Switch";
+import Button from "../../Button";
 import "./new-donation.css";
 
 interface Option {
@@ -46,6 +47,9 @@ export default function NewDonation({
       <div className={"switch-container"}>
         <Switch initChecked={false} />
         <span className={"switch-label"}>Urgent</span>
+      </div>
+      <div className={"input-container"}>
+        <Button label={"Create"} />
       </div>
     </div>
   );
