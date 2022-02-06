@@ -3,9 +3,16 @@ import Input from "../../Input";
 import Dropdown from "../../Dropdown";
 import Switch from "../../Switch";
 import Button from "../../Button";
-import "./new-drive.css";
+import { DropdownOption } from "../../Dropdown";
+import "./drive.css";
 
-export default function NewDrive() {
+interface DriveProps {
+  bloodAmount?: string;
+  bloodType: DropdownOption;
+  urgency?: boolean;
+}
+
+export default function Drive(props: DriveProps) {
   const bloodTypes = [
     { value: "O+", label: "O+" },
     { value: "O-", label: "O-" },
@@ -16,23 +23,31 @@ export default function NewDrive() {
     { value: "AB+", label: "AB+" },
     { value: "AB-", label: "AB-" },
   ];
-  const [bloodType, setBloodType] = React.useState<string | undefined>("");
-  const [urgency, setUrgency] = React.useState<boolean>(false);
+  const title = props.bloodAmount ? "Edit Drive" : "New Drive";
+
+  const [bloodType, setBloodType] = React.useState<string | undefined>(
+    props.bloodType?.value || bloodTypes[0].value
+  );
+  const [urgency, setUrgency] = React.useState<boolean>(props.urgency || false);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const data = new FormData(e.target.form);
+    for (var pair of data.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div className={"modal-container"}>
-        <div className={"modal-title"}>New Drive</div>
+        <div className={"modal-title"}>{title}</div>
         <div className={"input-container"}>
           <Input
             label={"Blood amount"}
             name={"bloodAmount"}
             placeholder={"type here..."}
+            defaultValue={props.bloodAmount}
           />
         </div>
         <div className={"input-container"}>
@@ -45,8 +60,8 @@ export default function NewDrive() {
           />
           <Dropdown
             options={bloodTypes}
+            selected={{ value: bloodType, label: bloodType }}
             label={"Blood type"}
-            placeHolder={"Select blood type"}
             onChange={(value) => {
               setBloodType(value?.value);
             }}
@@ -58,10 +73,10 @@ export default function NewDrive() {
             hidden={true}
             id={"urgency"}
             name={"urgency"}
-            value={urgency.toString()}
+            value={urgency?.toString()}
           />
           <Switch
-            initChecked={false}
+            initChecked={urgency}
             onToggle={(checked) => {
               setUrgency(checked);
             }}

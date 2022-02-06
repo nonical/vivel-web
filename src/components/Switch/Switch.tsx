@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import "./switch.css";
 
 interface SwitchProps {
-  initChecked: Boolean;
+  initChecked: boolean;
   onToggle?: (checked: boolean) => void;
 }
 
