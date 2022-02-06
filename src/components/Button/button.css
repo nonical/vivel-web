@@ -1,0 +1,10 @@
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  min-width: 325px;
+  min-height: 50px;
+  background-color: #ff647c;
+  color: white;
+}
