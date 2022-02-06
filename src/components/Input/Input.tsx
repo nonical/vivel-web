@@ -20,6 +20,7 @@ export default function Input({
       <input
         type="text"
         id={name}
+        name={name}
         placeholder={placeholder}
         defaultValue={defaultValue}
       />

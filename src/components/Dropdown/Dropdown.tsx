@@ -1,5 +1,5 @@
 import React from "react";
-import Select from "react-select";
+import Select, { SingleValue, ActionMeta } from "react-select";
 import DropdownStyles from "./DropdownStyles";
 import "./dropdown.css";
 
@@ -12,12 +12,14 @@ interface DropdownProps {
   options: Option[];
   placeHolder: string;
   label: string;
+  onChange: (newValue: SingleValue<Option>) => void;
 }
 
 export default function Dropdown({
   options,
   label,
   placeHolder,
+  onChange,
 }: DropdownProps) {
   return (
     <div>
@@ -27,6 +29,7 @@ export default function Dropdown({
         isSearchable={false}
         styles={DropdownStyles}
         placeholder={placeHolder}
+        onChange={onChange}
       />
     </div>
   );
