@@ -5,7 +5,7 @@ import Button from "../../Button";
 import "./finish-donation.css";
 
 export default function FinishDonation() {
-  const options = [
+  const donationStatuses = [
     { value: "Successful", label: "Successful" },
     { value: "Failed", label: "Failed" },
     { value: "Canceled", label: "Canceled" },
@@ -13,7 +13,7 @@ export default function FinishDonation() {
 
   const [donationStatus, setdonationStatus] = React.useState<
     string | undefined
-  >("");
+  >(donationStatuses[0].value);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -36,36 +36,40 @@ export default function FinishDonation() {
             value={donationStatus}
           />
           <Dropdown
-            options={options}
+            options={donationStatuses}
             label={"Status"}
-            selected={options[0]}
+            selected={donationStatuses[0]}
             onChange={(value) => {
               setdonationStatus(value?.value);
             }}
           />
         </div>
-
-        <div className={"finish-input-container"}>
-          <Input
-            label={"Leukocyte Count (ccm)"}
-            name={"leukocyteCount"}
-            placeholder={"6,000"}
-          />
-        </div>
-        <div className={"finish-input-container"}>
-          <Input
-            label={"Erythrocyte Count (ccm)"}
-            name={"erythrocyteCount"}
-            placeholder={"4,520,000"}
-          />
-        </div>
-        <div className={"finish-input-container"}>
-          <Input
-            label={"Platelet Count (ml)"}
-            name={"plateletCount"}
-            placeholder={"329,000"}
-          />
-        </div>
+        {donationStatus == donationStatuses[0].value && (
+          <>
+            <div className={"finish-input-container"}>
+              <Input
+                label={"Leukocyte Count (ccm)"}
+                name={"leukocyteCount"}
+                placeholder={"6,000"}
+              />
+            </div>
+            <div className={"finish-input-container"}>
+              <Input
+                label={"Erythrocyte Count (ccm)"}
+                name={"erythrocyteCount"}
+                placeholder={"4,520,000"}
+              />
+            </div>
+            <div className={"finish-input-container"}>
+              <Input
+                label={"Platelet Count (ml)"}
+                name={"plateletCount"}
+                placeholder={"329,000"}
+              />
+            </div>
+          </>
+        )}
+        {donationStatus != donationStatuses[0].value && <></>}
         <div className={"finish-input-container"}>
           <Button label={"Finish Donation"} onClick={handleSubmit} />
         </div>
