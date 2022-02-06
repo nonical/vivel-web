@@ -1,5 +1,5 @@
 import React from "react";
-import Select, { SingleValue, ActionMeta } from "react-select";
+import Select, { SingleValue } from "react-select";
 import DropdownStyles from "./DropdownStyles";
 import "./dropdown.css";
 
