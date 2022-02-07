@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import "./switch.css";
 
 interface SwitchProps {
-  initChecked: Boolean;
-  onToggle?: (checked: Boolean) => void;
+  initChecked: boolean;
+  onToggle?: (checked: boolean) => void;
 }
 
 export default function Switch({ initChecked, onToggle }: SwitchProps) {
@@ -32,7 +32,7 @@ export default function Switch({ initChecked, onToggle }: SwitchProps) {
         className="switch-body"
         onClick={() => {
           setChecked(!checked);
-          if (onToggle) onToggle(checked);
+          if (onToggle) onToggle(!checked);
         }}
       >
         <div ref={oval} className="oval" />

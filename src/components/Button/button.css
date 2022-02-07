@@ -7,4 +7,6 @@
   min-height: 50px;
   background-color: #ff647c;
   color: white;
+  cursor: pointer;
+  border: none;
 }

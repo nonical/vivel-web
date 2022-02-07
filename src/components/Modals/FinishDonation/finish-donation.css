@@ -1,0 +1,27 @@
+.modal-container {
+  position: relative;
+  height: 540px;
+  width: 410px;
+  border-radius: 10px;
+  border: 1px solid red;
+}
+
+.modal-title {
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 22px;
+  padding-top: 20px;
+}
+
+.finish-input-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+}
+
+.submit-button {
+  position: absolute;
+  bottom: 30px;
+  left: 42px;
+}

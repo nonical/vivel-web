@@ -1,0 +1,46 @@
+.modal-container {
+  height: 540px;
+  width: 410px;
+  border-radius: 10px;
+  border: 1px solid red;
+}
+
+.modal-title {
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 22px;
+  padding-top: 20px;
+}
+
+.modal-container {
+  position: relative;
+  height: 540px;
+  width: 410px;
+  border-radius: 10px;
+  border: 1px solid red;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.switch-container {
+  display: flex;
+  align-items: center;
+  padding-top: 50px;
+  padding-left: 42px;
+}
+.switch-label {
+  padding-left: 20px;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.submit-button {
+  position: absolute;
+  bottom: 30px;
+  left: 42px;
+}
