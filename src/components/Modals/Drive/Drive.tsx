@@ -37,9 +37,6 @@ export default function Drive(props: DriveProps) {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const data = new FormData(e.target.form);
-    for (var pair of data.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
   };
 
   return (
