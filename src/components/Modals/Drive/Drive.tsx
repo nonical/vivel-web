@@ -23,7 +23,11 @@ export default function Drive(props: DriveProps) {
     { value: "AB+", label: "AB+" },
     { value: "AB-", label: "AB-" },
   ];
-  const title = props.bloodAmount ? "Edit Drive" : "New Drive";
+
+  const { title, buttonLabel } =
+    Object.keys(props).length == 0
+      ? { title: "New Drive", buttonLabel: "Create" }
+      : { title: "Edit Drive", buttonLabel: "Update" };
 
   const [bloodType, setBloodType] = React.useState<string | undefined>(
     props.bloodType?.value || bloodTypes[0].value
@@ -84,7 +88,7 @@ export default function Drive(props: DriveProps) {
           <span className={"switch-label"}>Urgent</span>
         </div>
         <div className={"input-container submit-button"}>
-          <Button label={"Create"} onClick={handleSubmit} />
+          <Button label={buttonLabel} onClick={handleSubmit} />
         </div>
       </div>
     </form>
