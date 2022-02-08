@@ -4,17 +4,15 @@ table {
   font-size: 22px;
   line-height: 28px;
   width: 100%;
+  text-align: center;
+  border-collapse: collapse;
 }
 
-thead {
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
+thead th {
+  padding-bottom: 10px;
   border-bottom: 1px solid rgba(228, 228, 228, 0.6);
 }
 
-tr {
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
+table :first-of-type td {
+  padding-top: 10px;
 }

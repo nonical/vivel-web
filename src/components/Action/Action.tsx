@@ -15,7 +15,7 @@ export default function Action({
   titleStyles,
 }: ActionProps) {
   return (
-    <div className={styles.actions}>
+    <div className={styles.action}>
       <Icon style={iconStyles} />
       <span style={titleStyles}>{title}</span>
     </div>
