@@ -78,11 +78,11 @@ export default function Drive(props: DriveProps) {
           />
           <Switch
             initChecked={urgency}
+            title={"Urgent"}
             onToggle={(checked) => {
               setUrgency(checked);
             }}
           />
-          <span className={styles["switch-label"]}>Urgent</span>
         </div>
         <div className={styles["input-container submit-button"]}>
           <Button label={buttonLabel} onClick={handleSubmit} />

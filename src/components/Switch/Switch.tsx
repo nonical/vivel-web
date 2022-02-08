@@ -3,10 +3,11 @@ import styles from "./Switch.module.css";
 
 interface SwitchProps {
   initChecked: boolean;
+  title: string;
   onToggle?: (checked: boolean) => void;
 }
 
-export default function Switch({ initChecked, onToggle }: SwitchProps) {
+export default function Switch({ initChecked, title, onToggle }: SwitchProps) {
   const [checked, setChecked] = useState(initChecked);
   const oval = useRef<HTMLDivElement>(null);
 
@@ -27,16 +28,26 @@ export default function Switch({ initChecked, onToggle }: SwitchProps) {
   }, [checked]);
 
   return (
-    <div className={styles["bounding-box"]}>
-      <div
-        className={styles["switch-body"]}
-        onClick={() => {
-          setChecked(!checked);
-          if (onToggle) onToggle(!checked);
+    <>
+      <div className={styles["bounding-box"]}>
+        <div
+          className={styles["switch-body"]}
+          onClick={() => {
+            setChecked(!checked);
+            if (onToggle) onToggle(!checked);
+          }}
+        >
+          <div ref={oval} className={styles.oval} />
+        </div>
+      </div>
+      <span
+        style={{
+          marginLeft: 10,
+          marginRight: 25,
         }}
       >
-        <div ref={oval} className={styles.oval} />
-      </div>
-    </div>
+        {title}
+      </span>
+    </>
   );
 }
