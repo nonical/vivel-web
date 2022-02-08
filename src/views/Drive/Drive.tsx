@@ -15,15 +15,11 @@ export default function Drive() {
       <Navbar />
       <Main>
         <Title title={"Drives"}>
-          <Switch initChecked={false} onToggle={() => {}} />
-          <span
-            style={{
-              marginLeft: 10,
-              marginRight: 25,
-            }}
-          >
-            Show inactive
-          </span>
+          <Switch
+            initChecked={false}
+            onToggle={() => {}}
+            title={"Show inactive"}
+          />
           <Action
             title="New Drive"
             Icon={PlusCircle}
