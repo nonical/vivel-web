@@ -1,5 +1,5 @@
 import React from "react";
-import "./input.css";
+import styles from "./Input.module.css";
 
 interface InputProps {
   label?: string;
@@ -15,7 +15,7 @@ export default function Input({
   defaultValue,
 }: InputProps) {
   return (
-    <div className="main">
+    <div className={styles.main}>
       {label && <label htmlFor={name}>{label}</label>}
       <input
         type="text"

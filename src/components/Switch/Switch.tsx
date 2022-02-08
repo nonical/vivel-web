@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import "./switch.css";
+import styles from "./Switch.module.css";
 
 interface SwitchProps {
   initChecked: boolean;
@@ -27,15 +27,15 @@ export default function Switch({ initChecked, onToggle }: SwitchProps) {
   }, [checked]);
 
   return (
-    <div className="bounding-box">
+    <div className={styles["bounding-box"]}>
       <div
-        className="switch-body"
+        className={styles["switch-body"]}
         onClick={() => {
           setChecked(!checked);
           if (onToggle) onToggle(!checked);
         }}
       >
-        <div ref={oval} className="oval" />
+        <div ref={oval} className={styles.oval} />
       </div>
     </div>
   );

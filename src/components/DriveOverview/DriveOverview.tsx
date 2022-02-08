@@ -1,5 +1,5 @@
 import React from "react";
-import "./drive-overview.css";
+import styles from "./DonationOverview.module.css";
 
 interface DriveOverviewProps {
   date: string;
@@ -17,28 +17,36 @@ export default function DriveOverview({
   litresToGo,
 }: DriveOverviewProps) {
   return (
-    <div className={"drive-overview-container"}>
-      <div className={"drive-overview-row"}>
-        <div className={"drive-overview-box drive-overview-date"}>
-          <span className={"drive-overview-number"}>{date}</span>
+    <div className={styles["drive-overview-container"]}>
+      <div className={styles["drive-overview-row"]}>
+        <div className={styles["drive-overview-box drive-overview-date"]}>
+          <span className={styles["drive-overview-number"]}>{date}</span>
         </div>
-        <div className={"drive-overview-box drive-overview-third"}>
-          <span className={"drive-overview-number"}>{bloodType}</span>
-          <span className={"drive-overview-text"}>Blood type</span>
+        <div className={styles["drive-overview-box drive-overview-third"]}>
+          <span className={styles["drive-overview-number"]}>{bloodType}</span>
+          <span className={styles["drive-overview-text"]}>Blood type</span>
         </div>
       </div>
-      <div className={"drive-overview-row"}>
-        <div className={"drive-overview-box drive-overview-third"}>
-          <span className={"drive-overview-number"}>{pendingCount}</span>
-          <span className={"drive-overview-text"}>Pending requests</span>
+      <div className={styles["drive-overview-row"]}>
+        <div className={styles["drive-overview-box drive-overview-third"]}>
+          <span className={styles["drive-overview-number"]}>
+            {pendingCount}
+          </span>
+          <span className={styles["drive-overview-text"]}>
+            Pending requests
+          </span>
         </div>
-        <div className={"drive-overview-box drive-overview-third"}>
-          <span className={"drive-overview-number"}>{scheduledCount}</span>
-          <span className={"drive-overview-text"}>Scheduled donations</span>
+        <div className={styles["drive-overview-box drive-overview-third"]}>
+          <span className={styles["drive-overview-number"]}>
+            {scheduledCount}
+          </span>
+          <span className={styles["drive-overview-text"]}>
+            Scheduled donations
+          </span>
         </div>
-        <div className={"drive-overview-box drive-overview-third"}>
-          <span className={"drive-overview-number"}>{litresToGo}L</span>
-          <span className={"drive-overview-text"}>To go</span>
+        <div className={styles["drive-overview-box drive-overview-third"]}>
+          <span className={styles["drive-overview-number"]}>{litresToGo}L</span>
+          <span className={styles["drive-overview-text"]}>To go</span>
         </div>
       </div>
     </div>

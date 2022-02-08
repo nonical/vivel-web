@@ -1,5 +1,5 @@
 import React from "react";
-import "./action.css";
+import styles from "./Action.module.css";
 
 interface ActionProps {
   Icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
@@ -15,7 +15,7 @@ export default function Action({
   titleStyles,
 }: ActionProps) {
   return (
-    <div className={"action"}>
+    <div className={styles.actions}>
       <Icon style={iconStyles} />
       <span style={titleStyles}>{title}</span>
     </div>

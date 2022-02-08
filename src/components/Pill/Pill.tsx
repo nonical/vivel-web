@@ -1,5 +1,5 @@
 import React from "react";
-import "./pill.css";
+import style from "./Pill.module.css";
 
 interface PillProps {
   backgroundColor?: string;
@@ -10,10 +10,10 @@ interface PillProps {
 export default function Pill({ backgroundColor, label, styles }: PillProps) {
   return (
     <div
-      className={"pill"}
+      className={style.pill}
       style={{ backgroundColor: backgroundColor, ...styles }}
     >
-      <span className={"pill-content"}>{label}</span>
+      <span className={style["pill-content"]}>{label}</span>
     </div>
   );
 }

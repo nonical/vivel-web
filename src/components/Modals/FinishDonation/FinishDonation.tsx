@@ -2,8 +2,9 @@ import React from "react";
 import Input from "../../Input";
 import Dropdown from "../../Dropdown";
 import Button from "../../Button";
-import "./finish-donation.css";
 import TextInput from "../../TextInput";
+
+import styles from "./FinishDonation.module.css";
 
 export default function FinishDonation() {
   const donationStatuses = [
@@ -23,9 +24,9 @@ export default function FinishDonation() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className={"modal-container"}>
-        <div className={"modal-title"}>Finish Donation</div>
-        <div className={"finish-input-container"}>
+      <div className={styles["modal-container"]}>
+        <div className={styles["modal-title"]}>Finish Donation</div>
+        <div className={styles["finish-input-container"]}>
           <input
             type="text"
             hidden={true}
@@ -44,21 +45,21 @@ export default function FinishDonation() {
         </div>
         {donationStatus == donationStatuses[0].value && (
           <>
-            <div className={"finish-input-container"}>
+            <div className={styles["finish-input-container"]}>
               <Input
                 label={"Leukocyte Count (ccm)"}
                 name={"leukocyteCount"}
                 placeholder={"6,000"}
               />
             </div>
-            <div className={"finish-input-container"}>
+            <div className={styles["finish-input-container"]}>
               <Input
                 label={"Erythrocyte Count (ccm)"}
                 name={"erythrocyteCount"}
                 placeholder={"4,520,000"}
               />
             </div>
-            <div className={"finish-input-container"}>
+            <div className={styles["finish-input-container"]}>
               <Input
                 label={"Platelet Count (ml)"}
                 name={"plateletCount"}
@@ -68,7 +69,7 @@ export default function FinishDonation() {
           </>
         )}
         {donationStatus != donationStatuses[0].value && (
-          <div className={"finish-input-container"}>
+          <div className={styles["finish-input-container"]}>
             <TextInput
               label={"Note"}
               name={"note"}
@@ -76,7 +77,7 @@ export default function FinishDonation() {
             />
           </div>
         )}
-        <div className={"finish-input-container submit-button"}>
+        <div className={styles["finish-input-container submit-button"]}>
           <Button label={"Finish Donation"} onClick={handleSubmit} />
         </div>
       </div>

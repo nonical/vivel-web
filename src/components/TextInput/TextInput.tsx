@@ -1,5 +1,6 @@
 import React from "react";
-import "./text-input.css";
+import "./TextInput.module.css";
+import styles from "../Input/Input.module.css";
 
 interface TextInputProps {
   label?: string;
@@ -13,7 +14,7 @@ export default function TextInput({
   placeholder,
 }: TextInputProps) {
   return (
-    <div className="main">
+    <div className={styles.main}>
       {label && <label htmlFor={name}>{label}</label>}
       <textarea id={name} name={name} placeholder={placeholder} />
     </div>

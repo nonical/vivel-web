@@ -4,7 +4,7 @@ import Dropdown from "../../Dropdown";
 import Switch from "../../Switch";
 import Button from "../../Button";
 import { DropdownOption } from "../../Dropdown";
-import "./drive.css";
+import styles from "./Drive.module.css";
 
 interface DriveProps {
   bloodAmount?: string;
@@ -41,9 +41,9 @@ export default function Drive(props: DriveProps) {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className={"modal-container"}>
-        <div className={"modal-title"}>{title}</div>
-        <div className={"input-container"}>
+      <div className={styles["modal-container"]}>
+        <div className={styles["modal-title"]}>{title}</div>
+        <div className={styles["input-container"]}>
           <Input
             label={"Blood amount"}
             name={"bloodAmount"}
@@ -51,7 +51,7 @@ export default function Drive(props: DriveProps) {
             defaultValue={props.bloodAmount}
           />
         </div>
-        <div className={"input-container"}>
+        <div className={styles["input-container"]}>
           <input
             type="text"
             hidden={true}
@@ -68,7 +68,7 @@ export default function Drive(props: DriveProps) {
             }}
           />
         </div>
-        <div className={"switch-container"}>
+        <div className={styles["switch-container"]}>
           <input
             type="text"
             hidden={true}
@@ -82,9 +82,9 @@ export default function Drive(props: DriveProps) {
               setUrgency(checked);
             }}
           />
-          <span className={"switch-label"}>Urgent</span>
+          <span className={styles["switch-label"]}>Urgent</span>
         </div>
-        <div className={"input-container submit-button"}>
+        <div className={styles["input-container submit-button"]}>
           <Button label={buttonLabel} onClick={handleSubmit} />
         </div>
       </div>
