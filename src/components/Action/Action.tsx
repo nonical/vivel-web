@@ -6,6 +6,7 @@ interface ActionProps {
   title: string;
   iconStyles: React.CSSProperties;
   titleStyles?: React.CSSProperties;
+  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 export default function Action({
@@ -13,9 +14,10 @@ export default function Action({
   title,
   iconStyles,
   titleStyles,
+  onClick,
 }: ActionProps) {
   return (
-    <div className={styles.action}>
+    <div className={styles.action} onClick={onClick}>
       <Icon style={iconStyles} />
       <span style={titleStyles}>{title}</span>
     </div>

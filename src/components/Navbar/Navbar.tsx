@@ -22,11 +22,17 @@ export default function Navbar() {
           Icon={Heart}
           iconStyles={{ stroke: "#FF98A8", marginRight: 5 }}
           title={"Drives"}
+          onClick={() => {
+            alert("hewwo");
+          }}
         />
         <Action
           Icon={PieChart}
           iconStyles={{ stroke: "#FF98A8", marginRight: 5 }}
           title={"Reports"}
+          onClick={() => {
+            alert("hewwo");
+          }}
         />
       </div>
     </div>
