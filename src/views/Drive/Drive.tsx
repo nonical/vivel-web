@@ -8,12 +8,15 @@ import Switch from "../../components/Switch";
 import Action from "../../components/Action";
 import Title from "../../components/Title";
 import Main from "../../components/Main";
+import { default as DriveModal } from "../../components/Modals/Drive";
+
 import { ReactComponent as PlusCircle } from "../../assets/plus-circle.svg";
 import { fetchDrives } from "./actions";
 import { Drive as DriveModel } from "./actions";
 
 export default function Drive() {
   const [drives, setDrives] = useState<DriveModel[]>();
+  const [modal, setModal] = useState<boolean>(false);
 
   const { data: openDrives } = useQuery(
     ["openDrives"],
@@ -32,7 +35,8 @@ export default function Drive() {
   });
 
   return (
-    <>
+    <div>
+      <DriveModal isOpen={modal} />
       <Navbar />
       <Main>
         <Title title={"Drives"}>
@@ -47,6 +51,9 @@ export default function Drive() {
             title="New Drive"
             Icon={PlusCircle}
             iconStyles={{ stroke: "white", marginRight: 5 }}
+            onClick={() => {
+              setModal(!modal);
+            }}
           />
         </Title>
         <Container>
@@ -78,6 +85,6 @@ export default function Drive() {
           </div>
         </Container>
       </Main>
-    </>
+    </div>
   );
 }

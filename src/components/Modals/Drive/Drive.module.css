@@ -3,6 +3,10 @@
   width: 410px;
   border-radius: 10px;
   border: 1px solid red;
+  background-color: white;
+  position: absolute;
+  inset: 0px;
+  margin: auto;
 }
 
 .modal-title {
@@ -13,18 +17,32 @@
   padding-top: 20px;
 }
 
-.modal-container {
-  position: relative;
-  height: 540px;
-  width: 410px;
-  border-radius: 10px;
-  border: 1px solid red;
-}
-
 .input-container {
   display: flex;
   justify-content: center;
-  padding-top: 50px;
+  padding-top: 15px;
+}
+
+.date-input {
+  min-width: 315px;
+  min-height: 50px;
+  border: 1px solid #ff98a8;
+  font-size: 15px;
+  padding-left: 10px;
+}
+
+.date-label {
+  left: 0px;
+  top: 0px;
+  display: block;
+  margin-bottom: 15px;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+
+  color: #151522;
 }
 
 .switch-container {
