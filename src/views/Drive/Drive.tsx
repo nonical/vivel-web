@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useQuery } from "react-query";
 
 import Navbar from "../../components/Navbar";
 import Container from "../../components/Container";
@@ -8,8 +9,28 @@ import Action from "../../components/Action";
 import Title from "../../components/Title";
 import Main from "../../components/Main";
 import { ReactComponent as PlusCircle } from "../../assets/plus-circle.svg";
+import { fetchDrives } from "./actions";
+import { Drive as DriveModel } from "./actions";
 
 export default function Drive() {
+  const [drives, setDrives] = useState<DriveModel[]>();
+
+  const { data: openDrives } = useQuery(
+    ["openDrives"],
+    async () => {
+      return fetchDrives("Open");
+    },
+    {
+      onSuccess: (data) => {
+        if (!drives) setDrives(data);
+      },
+    }
+  );
+
+  const { data: closedDrives } = useQuery(["closedDrives"], () => {
+    return fetchDrives("Closed");
+  });
+
   return (
     <>
       <Navbar />
@@ -17,8 +38,10 @@ export default function Drive() {
         <Title title={"Drives"}>
           <Switch
             initChecked={false}
-            onToggle={() => {}}
-            title={"Show inactive"}
+            onToggle={(checked) => {
+              checked ? setDrives(closedDrives) : setDrives(openDrives);
+            }}
+            title={"Show closed"}
           />
           <Action
             title="New Drive"
@@ -30,26 +53,27 @@ export default function Drive() {
           <div style={{ minHeight: 600 }}>
             <Table>
               <thead>
-                <th>Date</th>
-                <th>Blood Amount</th>
-                <th>Blood Type</th>
-                <th>Urgent</th>
-                <th>Status</th>
+                <tr>
+                  <th>Date</th>
+                  <th>Blood Amount</th>
+                  <th>Blood Type</th>
+                  <th>Urgent</th>
+                  <th>Status</th>
+                </tr>
               </thead>
-              <tr>
-                <td>2020-10-05</td>
-                <td>3,5L</td>
-                <td>AB+</td>
-                <td>No</td>
-                <td>Active</td>
-              </tr>
-              <tr>
-                <td>2020-10-05</td>
-                <td>2,5L</td>
-                <td>O+</td>
-                <td>Yes</td>
-                <td>Active</td>
-              </tr>
+              <tbody>
+                {drives?.map((drive: DriveModel) => {
+                  return (
+                    <tr key={drive.driveId}>
+                      <td>{drive.date}</td>
+                      <td>{drive.amount}L</td>
+                      <td>{drive.bloodType}</td>
+                      <td>{drive.urgency}</td>
+                      <td>{drive.status}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
             </Table>
           </div>
         </Container>
