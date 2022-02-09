@@ -16,7 +16,7 @@ export const Primary = Template.bind({});
 Primary.args = {
   date: "2020-10-05",
   bloodType: "AB+",
-  pendingCount: "10",
-  scheduledCount: "12",
-  litresToGo: "3,5",
+  pendingCount: 10,
+  scheduledCount: 12,
+  litresToGo: 3.5,
 };

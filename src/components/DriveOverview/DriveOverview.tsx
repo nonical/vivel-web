@@ -1,12 +1,12 @@
 import React from "react";
-import styles from "./DonationOverview.module.css";
+import styles from "./DriveOverview.module.css";
 
 interface DriveOverviewProps {
   date: string;
   bloodType: string;
-  pendingCount: string;
-  scheduledCount: string;
-  litresToGo: string;
+  pendingCount: number;
+  scheduledCount: number;
+  litresToGo: number;
 }
 
 export default function DriveOverview({
