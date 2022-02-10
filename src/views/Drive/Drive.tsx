@@ -36,7 +36,12 @@ export default function Drive() {
 
   return (
     <div>
-      <DriveModal isOpen={modal} />
+      <DriveModal
+        isOpen={modal}
+        onClose={() => {
+          setModal(false);
+        }}
+      />
       <Navbar />
       <Main>
         <Title title={"Drives"}>

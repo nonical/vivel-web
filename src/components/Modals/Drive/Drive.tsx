@@ -17,6 +17,7 @@ interface DriveProps {
   bloodAmount?: string;
   bloodType?: DropdownOption;
   urgency?: boolean;
+  onClose: () => void;
 }
 
 export default function Drive(props: DriveProps) {
@@ -48,8 +49,19 @@ export default function Drive(props: DriveProps) {
   };
 
   return (
-    <div className={styles["modal-container"]} hidden={!props.isOpen}>
-      <form onSubmit={handleSubmit}>
+    <div
+      id="modal-container"
+      className={styles["modal-container"]}
+      hidden={!props.isOpen}
+      onClick={(event) => {
+        const container = document!.getElementById("modal-container");
+        if (event.target == container) {
+          container.hidden = true;
+          props.onClose();
+        }
+      }}
+    >
+      <form onSubmit={handleSubmit} className={styles["form-container"]}>
         <input
           type="text"
           hidden={true}
@@ -57,7 +69,18 @@ export default function Drive(props: DriveProps) {
           name={"hospitalId"}
           value={"c1f280c8-f8c7-4a50-9ee6-3acb906922d6"}
         />
-        <div className={styles["modal-title"]}>{title}</div>
+        <div className={styles["modal-title-container"]}>
+          <span>{title}</span>
+          <span
+            className={styles["modal-close-button"]}
+            onClick={() => {
+              document!.getElementById("modal-container")!.hidden = true;
+              props.onClose();
+            }}
+          >
+            &times;
+          </span>
+        </div>
         <div className={styles["input-container"]}>
           <Input
             label={"Blood amount"}
