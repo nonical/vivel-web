@@ -1,11 +1,24 @@
 .modal-container {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.form-container {
   height: 540px;
   width: 410px;
   border-radius: 10px;
   border: 1px solid red;
+  background-color: white;
+  position: absolute;
+  inset: 0px;
+  margin: auto;
 }
 
-.modal-title {
+.modal-title-container {
   display: flex;
   justify-content: center;
   font-weight: 600;
@@ -13,18 +26,42 @@
   padding-top: 20px;
 }
 
-.modal-container {
-  position: relative;
-  height: 540px;
-  width: 410px;
-  border-radius: 10px;
-  border: 1px solid red;
+.modal-close-button {
+  position: absolute;
+  font-size: 30px;
+  right: 30px;
+  top: 15px;
+  cursor: pointer;
 }
 
 .input-container {
   display: flex;
   justify-content: center;
-  padding-top: 50px;
+  padding-top: 15px;
+}
+
+.date-input {
+  min-width: 305px;
+  min-height: 50px;
+  border: 1px solid #ff98a8;
+  font-size: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
+}
+
+.date-label {
+  left: 0px;
+  top: 0px;
+  display: block;
+  margin-bottom: 15px;
+
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+
+  color: #151522;
 }
 
 .switch-container {
