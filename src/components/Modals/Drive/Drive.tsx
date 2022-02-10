@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useQuery } from "react-query";
+import React from "react";
+import { useMutation } from "react-query";
 
 import Input from "../../Input";
 import Dropdown from "../../Dropdown";
@@ -7,12 +7,12 @@ import Switch from "../../Switch";
 import Button from "../../Button";
 import { DropdownOption } from "../../Dropdown";
 import styles from "./Drive.module.css";
-import { toIsoDate } from "../../../utils/date";
 import { postDrive } from "./actions";
 import { Drive as DriveModel } from "./actions";
 
 interface DriveProps {
   isOpen: boolean;
+  hospitalId?: string;
   date?: string;
   bloodAmount?: string;
   bloodType?: DropdownOption;
@@ -33,7 +33,7 @@ export default function Drive(props: DriveProps) {
   ];
 
   const { title, buttonLabel } =
-    Object.keys(props).length == 1
+    Object.keys(props).length == 3
       ? { title: "New Drive", buttonLabel: "Create" }
       : { title: "Edit Drive", buttonLabel: "Update" };
 
@@ -42,10 +42,29 @@ export default function Drive(props: DriveProps) {
   );
   const [urgency, setUrgency] = React.useState<boolean>(props.urgency || false);
 
+  const mutation = useMutation(async (data: FormData) => {
+    const body: DriveModel = {
+      bloodType: data.get("bloodType") as string,
+      hospitalId: data.get("hospitalId") as string,
+      date: data.get("date") as string,
+      amount: parseInt(data.get("amount") as string),
+      urgency: (data.get("urgency") as string) == "true",
+    };
+
+    await postDrive(body);
+  });
+
+  const hideModal = () => {
+    document.getElementById("modal-container")!.hidden = true;
+    props.onClose();
+  };
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const data = new FormData(e.target.form);
-    await postDrive(Object.fromEntries(data));
+    await mutation.mutateAsync(data, {
+      onSuccess: hideModal,
+    });
   };
 
   return (
@@ -54,11 +73,8 @@ export default function Drive(props: DriveProps) {
       className={styles["modal-container"]}
       hidden={!props.isOpen}
       onClick={(event) => {
-        const container = document!.getElementById("modal-container");
-        if (event.target == container) {
-          container.hidden = true;
-          props.onClose();
-        }
+        const container = document.getElementById("modal-container");
+        if (event.target == container) hideModal();
       }}
     >
       <form onSubmit={handleSubmit} className={styles["form-container"]}>
@@ -67,17 +83,11 @@ export default function Drive(props: DriveProps) {
           hidden={true}
           id={"hospitalId"}
           name={"hospitalId"}
-          value={"c1f280c8-f8c7-4a50-9ee6-3acb906922d6"}
+          value={props.hospitalId}
         />
         <div className={styles["modal-title-container"]}>
           <span>{title}</span>
-          <span
-            className={styles["modal-close-button"]}
-            onClick={() => {
-              document!.getElementById("modal-container")!.hidden = true;
-              props.onClose();
-            }}
-          >
+          <span className={styles["modal-close-button"]} onClick={hideModal}>
             &times;
           </span>
         </div>

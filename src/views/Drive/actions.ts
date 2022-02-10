@@ -19,7 +19,7 @@ export async function fetchDrives(status: string): Promise<Drive[]> {
 
   const drives: Drive[] = json.results.map((drive: Drive) => ({
     ...drive,
-    amount: drive.amount / 1000,
+    amount: (drive.amount / 1000).toFixed(2),
     date: toIsoDate(new Date(drive.date)),
     urgency: drive.urgency ? "Yes" : "No",
   }));
