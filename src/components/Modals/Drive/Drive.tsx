@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useMutation } from "react-query";
 
 import Input from "../../Input";
@@ -54,8 +54,10 @@ export default function Drive(props: DriveProps) {
     await postDrive(body);
   });
 
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const hideModal = () => {
-    document.getElementById("modal-container")!.hidden = true;
+    containerRef.current!.hidden = true;
     props.onClose();
   };
 
@@ -69,12 +71,11 @@ export default function Drive(props: DriveProps) {
 
   return (
     <div
-      id="modal-container"
+      ref={containerRef}
       className={styles["modal-container"]}
       hidden={!props.isOpen}
       onClick={(event) => {
-        const container = document.getElementById("modal-container");
-        if (event.target == container) hideModal();
+        if (event.target == containerRef.current) hideModal();
       }}
     >
       <form onSubmit={handleSubmit} className={styles["form-container"]}>
