@@ -27,7 +27,6 @@ export default function Modal({
       className={styles["modal-container"]}
       hidden={!isOpen}
       onClick={(event) => {
-        console.log(event.target);
         if (event.target == containerRef.current) hideModal();
       }}
     >
