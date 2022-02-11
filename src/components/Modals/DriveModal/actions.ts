@@ -8,13 +8,27 @@ export interface Drive {
   urgency: boolean;
 }
 
-export async function postDrive(drive: Drive): Promise<Drive> {
+const formDataToDrive = (formData: FormData) => {
+  const body: Drive = {
+    bloodType: formData.get("bloodType") as string,
+    hospitalId: formData.get("hospitalId") as string,
+    date: formData.get("date") as string,
+    amount: parseInt(formData.get("amount") as string),
+    urgency: (formData.get("urgency") as string) == "true",
+  };
+
+  return body;
+};
+
+export async function postDrive(formData: FormData): Promise<Drive> {
+  const body = formDataToDrive(formData);
+
   const res = await fetch(ENDPOINTS.Drives, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(drive),
+    body: JSON.stringify(body),
   });
 
   const json = await res.json();

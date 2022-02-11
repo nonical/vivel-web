@@ -20,7 +20,7 @@ interface DriveModalProps {
   bloodType?: DropdownOption;
   urgency?: boolean;
   onClose: () => void;
-  mutationMethod: (body: DriveModel) => Promise<DriveModel>;
+  mutationMethod: (body: FormData) => Promise<DriveModel>;
 }
 
 export default function DriveModal(props: DriveModalProps) {
@@ -41,15 +41,7 @@ export default function DriveModal(props: DriveModalProps) {
   const [urgency, setUrgency] = React.useState<boolean>(props.urgency || false);
 
   const mutation = useMutation(async (data: FormData) => {
-    const body: DriveModel = {
-      bloodType: data.get("bloodType") as string,
-      hospitalId: data.get("hospitalId") as string,
-      date: data.get("date") as string,
-      amount: parseInt(data.get("amount") as string),
-      urgency: (data.get("urgency") as string) == "true",
-    };
-
-    await props.mutationMethod(body);
+    await props.mutationMethod(data);
   });
 
   const handleSubmit = async (e: any) => {
