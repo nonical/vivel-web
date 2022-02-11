@@ -19,7 +19,9 @@ export default function DriveOverview({
   return (
     <div className={styles["drive-overview-container"]}>
       <div className={styles["drive-overview-row"]}>
-        <div className={styles["drive-overview-box drive-overview-date"]}>
+        <div
+          className={`${styles["drive-overview-box"]} ${styles["drive-overview-date"]}`}
+        >
           <span className={styles["drive-overview-number"]}>{date}</span>
         </div>
         <div className={styles["drive-overview-box drive-overview-third"]}>
@@ -28,7 +30,9 @@ export default function DriveOverview({
         </div>
       </div>
       <div className={styles["drive-overview-row"]}>
-        <div className={styles["drive-overview-box drive-overview-third"]}>
+        <div
+          className={`${styles["drive-overview-box"]} ${styles["drive-overview-third"]}`}
+        >
           <span className={styles["drive-overview-number"]}>
             {pendingCount}
           </span>
@@ -36,7 +40,9 @@ export default function DriveOverview({
             Pending requests
           </span>
         </div>
-        <div className={styles["drive-overview-box drive-overview-third"]}>
+        <div
+          className={`${styles["drive-overview-box"]} ${styles["drive-overview-third"]}`}
+        >
           <span className={styles["drive-overview-number"]}>
             {scheduledCount}
           </span>
@@ -44,7 +50,9 @@ export default function DriveOverview({
             Scheduled donations
           </span>
         </div>
-        <div className={styles["drive-overview-box drive-overview-third"]}>
+        <div
+          className={`${styles["drive-overview-box"]} ${styles["drive-overview-third"]}`}
+        >
           <span className={styles["drive-overview-number"]}>{litresToGo}L</span>
           <span className={styles["drive-overview-text"]}>To go</span>
         </div>
