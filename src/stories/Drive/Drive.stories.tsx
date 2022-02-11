@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import Drive from "../../components/Modals/Drive";
+import Drive from "../../components/Modals/DriveModal";
 
 export default {
   title: "Example/Drive",

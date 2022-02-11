@@ -8,12 +8,13 @@ import Switch from "../../components/Switch";
 import Action from "../../components/Action";
 import Title from "../../components/Title";
 import Main from "../../components/Main";
-import { default as DriveModal } from "../../components/Modals/Drive";
+import DriveModal from "../../components/Modals/DriveModal";
 
 import { ReactComponent as PlusCircle } from "../../assets/plus-circle.svg";
-import { fetchDrives } from "./actions";
+
 import { Drive as DriveModel } from "./actions";
-import { toDateFormat } from "../../utils/date";
+import { fetchDrives } from "./actions";
+import { postDrive } from "../../components/Modals/DriveModal/actions";
 
 export default function Drive() {
   const [drives, setDrives] = useState<DriveModel[]>();
@@ -38,8 +39,11 @@ export default function Drive() {
   return (
     <div>
       <DriveModal
+        title="New Drive"
+        buttonLabel="Create"
         hospitalId={"c1f280c8-f8c7-4a50-9ee6-3acb906922d6"}
         isOpen={modal}
+        mutationMethod={postDrive}
         onClose={() => {
           setModal(false);
         }}
