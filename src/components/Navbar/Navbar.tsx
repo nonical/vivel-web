@@ -6,15 +6,17 @@ import { ReactComponent as Heart } from "../../assets/heart.svg";
 import { ReactComponent as PieChart } from "../../assets/pie-chart.svg";
 
 import styles from "./Navbar.module.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 interface NavbarProps {
   hospitalName: string;
 }
 
 export default function Navbar({ hospitalName }: NavbarProps) {
-  const currentScreen = (location: string) => {
-    return window.location.pathname.includes(location);
+  const location = useLocation();
+
+  const currentScreen = (path: string) => {
+    return location.pathname.includes(path);
   };
 
   return (
