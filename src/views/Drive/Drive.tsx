@@ -15,6 +15,7 @@ import { ReactComponent as PlusCircle } from "../../assets/plus-circle.svg";
 import { Drive as DriveModel } from "./actions";
 import { fetchDrives } from "./actions";
 import { postDrive } from "../../components/Modals/DriveModal/actions";
+import { toDateFormat } from "../../utils/date";
 
 export default function Drive() {
   const [drives, setDrives] = useState<DriveModel[]>();
@@ -80,10 +81,10 @@ export default function Drive() {
                 </tr>
               </thead>
               <tbody>
-                {drives?.map((drive: DriveModel) => {
+                {drives?.map((drive) => {
                   return (
                     <tr key={drive.driveId}>
-                      <td>{drive.date}</td>
+                      <td>{toDateFormat(drive.date)}</td>
                       <td>{drive.amount}L</td>
                       <td>{drive.bloodType}</td>
                       <td>{drive.urgency}</td>
