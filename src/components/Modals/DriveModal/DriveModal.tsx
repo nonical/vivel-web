@@ -16,7 +16,7 @@ interface DriveModalProps {
   isOpen: boolean;
   hospitalId?: string;
   date?: string;
-  bloodAmount?: string;
+  bloodAmount?: number;
   bloodType?: DropdownOption;
   urgency?: boolean;
   onClose: () => void;
@@ -67,7 +67,7 @@ export default function DriveModal(props: DriveModalProps) {
             label={"Blood amount"}
             name={"amount"}
             placeholder={"type here..."}
-            defaultValue={props.bloodAmount}
+            defaultValue={props.bloodAmount?.toString()}
           />
         </div>
         <div className={styles["input-container"]}>

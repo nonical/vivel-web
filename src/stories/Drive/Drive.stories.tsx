@@ -14,7 +14,7 @@ export const Edit = Template.bind({});
 
 New.args = {};
 Edit.args = {
-  bloodAmount: "1000",
+  bloodAmount: 1000,
   bloodType: { value: "AB+", label: "AB+" },
   urgency: true,
 };
