@@ -42,7 +42,6 @@ export default function Drive() {
       <DriveModal
         title="New Drive"
         buttonLabel="Create"
-        hospitalId={"c1f280c8-f8c7-4a50-9ee6-3acb906922d6"}
         isOpen={modal}
         mutationMethod={postDrive}
         onClose={() => {
