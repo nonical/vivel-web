@@ -24,7 +24,9 @@ export default function DriveOverview({
         >
           <span className={styles["drive-overview-number"]}>{date}</span>
         </div>
-        <div className={styles["drive-overview-box drive-overview-third"]}>
+        <div
+          className={`${styles["drive-overview-box"]} ${styles["drive-overview-third"]}`}
+        >
           <span className={styles["drive-overview-number"]}>{bloodType}</span>
           <span className={styles["drive-overview-text"]}>Blood type</span>
         </div>
