@@ -8,11 +8,14 @@ import Switch from "../../components/Switch";
 import Action from "../../components/Action";
 import Title from "../../components/Title";
 import Main from "../../components/Main";
-import { default as DriveModal } from "../../components/Modals/Drive";
+import DriveModal from "../../components/Modals/DriveModal";
 
 import { ReactComponent as PlusCircle } from "../../assets/plus-circle.svg";
-import { fetchDrives } from "./actions";
+
 import { Drive as DriveModel } from "./actions";
+import { fetchDrives } from "./actions";
+import { postDrive } from "../../components/Modals/DriveModal/actions";
+import { toDateFormat } from "../../utils/date";
 
 export default function Drive() {
   const [drives, setDrives] = useState<DriveModel[]>();
@@ -37,7 +40,10 @@ export default function Drive() {
   return (
     <div>
       <DriveModal
+        title="New Drive"
+        buttonLabel="Create"
         isOpen={modal}
+        mutationMethod={postDrive}
         onClose={() => {
           setModal(false);
         }}
@@ -74,10 +80,10 @@ export default function Drive() {
                 </tr>
               </thead>
               <tbody>
-                {drives?.map((drive: DriveModel) => {
+                {drives?.map((drive) => {
                   return (
                     <tr key={drive.driveId}>
-                      <td>{drive.date}</td>
+                      <td>{toDateFormat(drive.date)}</td>
                       <td>{drive.amount}L</td>
                       <td>{drive.bloodType}</td>
                       <td>{drive.urgency}</td>

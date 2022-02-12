@@ -1,15 +1,13 @@
 import { ENDPOINTS } from "../../utils/config";
-import { toIsoDate } from "../../utils/date";
+import { toDateFormat } from "../../utils/date";
+import { DateTime } from "luxon";
 
 export interface Drive {
   amount: number;
   bloodType: string;
-  createdAt: Date;
-  date: Date;
+  date: DateTime;
   driveId: string;
-  hospitalId: string;
   status: string;
-  updatedAt: Date | null;
   urgency: boolean;
 }
 
@@ -17,10 +15,10 @@ export async function fetchDrives(status: string): Promise<Drive[]> {
   const res = await fetch(ENDPOINTS.Drives + `?Status=${status}`);
   const json = await res.json();
 
-  const drives: Drive[] = json.results.map((drive: Drive) => ({
+  const drives: Drive[] = json.results.map((drive: any) => ({
     ...drive,
-    amount: drive.amount / 1000,
-    date: toIsoDate(new Date(drive.date)),
+    amount: (drive.amount / 1000).toFixed(2),
+    date: DateTime.fromISO(drive.date),
     urgency: drive.urgency ? "Yes" : "No",
   }));
 

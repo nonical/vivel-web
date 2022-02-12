@@ -1,39 +1,3 @@
-.modal-container {
-  position: fixed;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.form-container {
-  height: 540px;
-  width: 410px;
-  border-radius: 10px;
-  border: 1px solid red;
-  background-color: white;
-  position: absolute;
-  inset: 0px;
-  margin: auto;
-}
-
-.modal-title-container {
-  display: flex;
-  justify-content: center;
-  font-weight: 600;
-  font-size: 22px;
-  padding-top: 20px;
-}
-
-.modal-close-button {
-  position: absolute;
-  font-size: 30px;
-  right: 30px;
-  top: 15px;
-  cursor: pointer;
-}
-
 .input-container {
   display: flex;
   justify-content: center;
