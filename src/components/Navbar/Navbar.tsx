@@ -37,7 +37,7 @@ export default function Navbar({ hospitalName }: NavbarProps) {
             title={"Drives"}
           />
         </Link>
-        <Link to="/drives" style={{ textDecoration: "none" }}>
+        <Link to="/reports" style={{ textDecoration: "none" }}>
           <Action
             Icon={PieChart}
             iconStyles={{
