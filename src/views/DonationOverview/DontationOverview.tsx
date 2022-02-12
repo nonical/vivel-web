@@ -34,7 +34,7 @@ export default function DontationOverview() {
 
   return (
     <>
-      <Navbar />
+      <Navbar hospitalName="DZ Hospital" />
       <Main>
         <Title title="Drive Overview">
           <Action

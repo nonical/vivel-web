@@ -6,7 +6,7 @@ interface ActionProps {
   title: string;
   iconStyles: React.CSSProperties;
   titleStyles?: React.CSSProperties;
-  onClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+  onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 }
 
 export default function Action({

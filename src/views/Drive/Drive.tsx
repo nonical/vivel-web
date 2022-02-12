@@ -48,7 +48,7 @@ export default function Drive() {
           setModal(false);
         }}
       />
-      <Navbar />
+      <Navbar hospitalName="DZ Hospital" />
       <Main>
         <Title title={"Drives"}>
           <Switch

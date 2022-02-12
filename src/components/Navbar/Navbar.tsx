@@ -6,34 +6,47 @@ import { ReactComponent as Heart } from "../../assets/heart.svg";
 import { ReactComponent as PieChart } from "../../assets/pie-chart.svg";
 
 import styles from "./Navbar.module.css";
+import { Link } from "react-router-dom";
 
-export default function Navbar() {
+interface NavbarProps {
+  hospitalName: string;
+}
+
+export default function Navbar({ hospitalName }: NavbarProps) {
+  const currentScreen = (location: string) => {
+    return window.location.pathname.includes(location);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles["pill-container"]}>
         <Pill
           backgroundColor="#FF98A8"
-          label="DZ Hospital"
+          label={hospitalName}
           styles={{ marginLeft: 20 }}
         ></Pill>
       </div>
       <div className={styles.actions}>
-        <Action
-          Icon={Heart}
-          iconStyles={{ stroke: "#FF98A8", marginRight: 5 }}
-          title={"Drives"}
-          onClick={() => {
-            alert("hewwo");
-          }}
-        />
-        <Action
-          Icon={PieChart}
-          iconStyles={{ stroke: "#FF98A8", marginRight: 5 }}
-          title={"Reports"}
-          onClick={() => {
-            alert("hewwo");
-          }}
-        />
+        <Link to="/drives" style={{ textDecoration: "none" }}>
+          <Action
+            Icon={Heart}
+            iconStyles={{
+              stroke: currentScreen("/drives") ? "#FF98A8" : "#999999",
+              marginRight: 5,
+            }}
+            title={"Drives"}
+          />
+        </Link>
+        <Link to="/reports" style={{ textDecoration: "none" }}>
+          <Action
+            Icon={PieChart}
+            iconStyles={{
+              stroke: currentScreen("/reports") ? "#FF98A8" : "#999999",
+              marginRight: 5,
+            }}
+            title={"Reports"}
+          />
+        </Link>
       </div>
     </div>
   );

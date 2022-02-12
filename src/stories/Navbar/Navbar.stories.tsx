@@ -7,7 +7,9 @@ export default {
   component: Navbar,
 } as ComponentMeta<typeof Navbar>;
 
-const Template: ComponentStory<typeof Navbar> = (args) => <Navbar />;
+const Template: ComponentStory<typeof Navbar> = (args) => (
+  <Navbar hospitalName="DZ Hospital" />
+);
 
 export const Primary = Template.bind({});
 
