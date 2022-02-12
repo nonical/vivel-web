@@ -1,0 +1,42 @@
+body {
+  background-color: #ff647c;
+}
+
+.content {
+  margin: 40px 160px 0px 160px;
+  height: 100vh;
+}
+
+.heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+h1 {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 60px;
+  color: #ffffff;
+  margin: 20px 0px 10px 0px;
+}
+
+h3 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  /* line-height: 28px; */
+  color: #ffffff;
+  margin: 0;
+}
+
+.donations {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 20px;
+}
+
+.fill {
+  flex: 1 1 0;
+}
