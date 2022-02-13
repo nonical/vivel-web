@@ -6,3 +6,7 @@ export function displayErrors(error: any): void {
     errors[key].forEach((x: string) => toast.error(x));
   }
 }
+
+export function displaySuccess(): void {
+  toast.success("Successfully saved");
+}

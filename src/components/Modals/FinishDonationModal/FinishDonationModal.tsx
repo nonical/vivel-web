@@ -8,7 +8,7 @@ import styles from "../Modal/Modal.module.css";
 import Modal from "../Modal";
 import { useMutation } from "react-query";
 import { putDonation } from "./actions";
-import { displayErrors } from "../../../utils/toast";
+import { displayErrors, displaySuccess } from "../../../utils/toast";
 
 interface DonationModalProps {
   title: string;
@@ -37,7 +37,10 @@ export default function FinishDonation(props: DonationModalProps) {
     await mutation.mutateAsync(
       { formData: data, donationId: props.donationId },
       {
-        onSuccess: props.onClose,
+        onSuccess: () => {
+          displaySuccess();
+          props.onClose();
+        },
         onError: (error: any) => {
           displayErrors(error);
         },

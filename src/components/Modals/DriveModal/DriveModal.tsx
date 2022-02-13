@@ -13,7 +13,7 @@ import Modal from "../Modal";
 import { useParams } from "react-router-dom";
 import { DateTime } from "luxon";
 import { toast } from "react-toastify";
-import { displayErrors } from "../../../utils/toast";
+import { displayErrors, displaySuccess } from "../../../utils/toast";
 
 interface DriveModalProps {
   title: string;
@@ -56,7 +56,10 @@ export default function DriveModal(props: DriveModalProps) {
     await mutation.mutateAsync(
       { formData: data, driveId: driveId },
       {
-        onSuccess: props.onClose,
+        onSuccess: () => {
+          displaySuccess();
+          props.onClose();
+        },
         onError: (error: any) => {
           displayErrors(error);
         },
