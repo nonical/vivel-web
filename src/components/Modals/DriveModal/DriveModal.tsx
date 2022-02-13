@@ -7,6 +7,7 @@ import Switch from "../../Switch";
 import Button from "../../Button";
 import { DropdownOption } from "../../Dropdown";
 import styles from "./DriveModal.module.css";
+import modalStyles from "../Modal/Modal.module.css";
 import { Drive as DriveModel } from "./actions";
 import Modal from "../Modal";
 import { useParams } from "react-router-dom";
@@ -71,7 +72,7 @@ export default function DriveModal(props: DriveModalProps) {
           name={"hospitalId"}
           value={""}
         />
-        <div className={styles["input-container"]}>
+        <div className={modalStyles["input-container"]}>
           <Input
             label={"Blood amount"}
             name={"amount"}
@@ -79,7 +80,7 @@ export default function DriveModal(props: DriveModalProps) {
             defaultValue={props.bloodAmount?.toString()}
           />
         </div>
-        <div className={styles["input-container"]}>
+        <div className={modalStyles["input-container"]}>
           <input
             type="text"
             hidden={true}
@@ -96,7 +97,7 @@ export default function DriveModal(props: DriveModalProps) {
             }}
           />
         </div>
-        <div className={styles["input-container"]}>
+        <div className={modalStyles["input-container"]}>
           <div>
             <label htmlFor="date" className={styles["date-label"]}>
               Date
@@ -128,7 +129,7 @@ export default function DriveModal(props: DriveModalProps) {
           />
         </div>
         <div
-          className={`${styles["input-container"]} ${styles["submit-button"]}`}
+          className={`${modalStyles["input-container"]} ${modalStyles["submit-button"]}`}
         >
           <Button label={props.buttonLabel} onClick={handleSubmit} />
         </div>

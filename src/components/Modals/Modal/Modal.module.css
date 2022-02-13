@@ -33,3 +33,15 @@
   top: 15px;
   cursor: pointer;
 }
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+}
+
+.submit-button {
+  position: absolute;
+  bottom: 30px;
+  left: 42px;
+}
