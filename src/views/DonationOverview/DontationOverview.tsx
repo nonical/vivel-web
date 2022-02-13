@@ -17,7 +17,8 @@ import Main from "../../components/Main";
 import DriveModal from "../../components/Modals/DriveModal";
 
 export default function DontationOverview() {
-  const [modal, setModal] = useState<boolean>(false);
+  const [driveModal, setDriveModal] = useState<boolean>(false);
+  const [donationModal, setDonationModal] = useState<boolean>(false);
 
   const { driveId } = useParams();
 
@@ -41,14 +42,14 @@ export default function DontationOverview() {
       <DriveModal
         title="Edit Drive"
         buttonLabel="Update"
-        isOpen={modal}
+        isOpen={driveModal}
         mutationMethod={putDrive}
         bloodAmount={drive.amount}
         bloodType={{ value: drive.bloodType, label: drive.bloodType }}
         date={drive.date.toString()}
         urgency={drive.urgency}
         onClose={() => {
-          setModal(false);
+          setDriveModal(false);
         }}
       />
       <Navbar hospitalName="DZ Hospital" />
@@ -59,7 +60,7 @@ export default function DontationOverview() {
             Icon={Settings}
             iconStyles={{ stroke: "white", marginLeft: 5, marginRight: 5 }}
             onClick={() => {
-              setModal(!modal);
+              setDriveModal(!driveModal);
             }}
           />
           <Action
@@ -94,7 +95,10 @@ export default function DontationOverview() {
                   {donations
                     .filter((x) => x.status === "Scheduled")
                     .map((x) => (
-                      <tr key={x.userId}>
+                      <tr
+                        key={x.userId}
+                        onClick={() => setDonationModal(!donationModal)}
+                      >
                         <td>{x.userId}</td>
                         <td>{toDateFormat(x.scheduledAt!)}</td>
                         <td>{toTimeFormat(x.scheduledAt!)}</td>
