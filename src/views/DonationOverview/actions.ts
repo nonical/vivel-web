@@ -32,6 +32,7 @@ interface Donation {
   status: string;
   updatedAt: DateTime | null;
   userId: string;
+  userName: string;
 }
 
 export async function fetchDriveById(driveId: string): Promise<DriveDetails> {
