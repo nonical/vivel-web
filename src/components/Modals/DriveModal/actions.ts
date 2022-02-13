@@ -2,6 +2,7 @@ import { ENDPOINTS } from "../../../utils/config";
 
 export interface Drive {
   amount: number;
+  status: string;
   bloodType: string;
   date: string;
   hospitalId: string;
@@ -10,6 +11,7 @@ export interface Drive {
 
 const formDataToDrive = (formData: FormData) => {
   const body: Drive = {
+    status: formData.get("status") as string,
     bloodType: formData.get("bloodType") as string,
     hospitalId: formData.get("hospitalId") as string,
     date: formData.get("date") as string,

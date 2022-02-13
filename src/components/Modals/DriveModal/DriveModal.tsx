@@ -65,6 +65,13 @@ export default function DriveModal(props: DriveModalProps) {
         <input
           type="text"
           hidden={true}
+          id={"status"}
+          name={"status"}
+          value={"Open"}
+        />
+        <input
+          type="text"
+          hidden={true}
           id={"hospitalId"}
           name={"hospitalId"}
           value={""}
