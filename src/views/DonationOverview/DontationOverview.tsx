@@ -54,20 +54,9 @@ export default function DontationOverview() {
           <DriveOverview
             bloodType={drive.bloodType}
             date={toDateFormat(drive.date)}
-            litresToGo={
-              (drive.amount -
-                donations
-                  .filter((x) => x.status === "Approved")
-                  .map((x) => x.amount)
-                  .reduce((_, c) => c, 0)!) /
-              1000
-            }
-            pendingCount={
-              donations.filter((x) => x.status === "Pending").length
-            }
-            scheduledCount={
-              donations.filter((x) => x.status === "Scheduled").length
-            }
+            litresToGo={drive.amountLeft / 1000}
+            pendingCount={drive.pendingCount}
+            scheduledCount={drive.scheduledCount}
           />
         </Container>
         <div className={styles.donations}>
