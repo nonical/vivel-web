@@ -13,6 +13,12 @@ interface Drive {
   urgency: boolean;
 }
 
+interface DriveDetails extends Drive {
+  amountLeft: number;
+  pendingCount: number;
+  scheduledCount: number;
+}
+
 interface Donation {
   amount: number | null;
   createdAt: DateTime;
@@ -28,11 +34,11 @@ interface Donation {
   userId: string;
 }
 
-export async function fetchDriveById(driveId: string): Promise<Drive> {
-  const res = await fetch(ENDPOINTS.Drives + "/" + driveId);
+export async function fetchDriveById(driveId: string): Promise<DriveDetails> {
+  const res = await fetch(ENDPOINTS.Drives + "/" + driveId + "/details");
   const json = await res.json();
 
-  const drive: Drive = {
+  const drive: DriveDetails = {
     ...json,
     date: DateTime.fromISO(json.date),
     createdAt: DateTime.fromISO(json.createdAt),
