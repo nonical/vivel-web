@@ -11,12 +11,13 @@ import modalStyles from "../Modal/Modal.module.css";
 import { Drive as DriveModel } from "./actions";
 import Modal from "../Modal";
 import { useParams } from "react-router-dom";
+import { DateTime } from "luxon";
 
 interface DriveModalProps {
   title: string;
   buttonLabel: string;
   isOpen: boolean;
-  date?: string;
+  date?: DateTime;
   bloodAmount?: number;
   bloodType?: DropdownOption;
   urgency?: boolean;
@@ -35,10 +36,6 @@ export default function DriveModal(props: DriveModalProps) {
     { value: "AB+", label: "AB+" },
     { value: "AB-", label: "AB-" },
   ];
-
-  const dateInputFormat = (date?: any) => {
-    return new Date(date || new Date()).toISOString().split("T")[0];
-  };
 
   const [bloodType, setBloodType] = React.useState<string | undefined>(
     props.bloodType?.value || bloodTypes[0].value
@@ -106,8 +103,8 @@ export default function DriveModal(props: DriveModalProps) {
               type="date"
               id={"date"}
               name={"date"}
-              min={dateInputFormat()}
-              value={dateInputFormat(props.date)}
+              min={DateTime.now().toISODate()}
+              value={props.date?.toISODate() ?? DateTime.now().toISODate()}
               className={styles["date-input"]}
             />
           </div>

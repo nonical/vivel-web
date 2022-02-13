@@ -49,7 +49,7 @@ export default function DontationOverview() {
         mutationMethod={putDrive}
         bloodAmount={drive.amount}
         bloodType={{ value: drive.bloodType, label: drive.bloodType }}
-        date={drive.date.toString()}
+        date={drive.date}
         urgency={drive.urgency}
         onClose={() => {
           setDriveModal(false);
