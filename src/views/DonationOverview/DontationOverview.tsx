@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import Container from "../../components/Container";
@@ -8,13 +8,17 @@ import Table from "../../components/Table";
 import Title from "../../components/Title";
 import { toDateFormat, toTimeFormat } from "../../utils/date";
 import { fetchDriveById, fetchDriveDonations } from "./actions";
+import { putDrive } from "../../components/Modals/DriveModal/actions";
 import styles from "./DriveOverview.module.css";
 import { ReactComponent as XCircle } from "../../assets/x-circle.svg";
 import { ReactComponent as Settings } from "../../assets/settings.svg";
 import Action from "../../components/Action";
 import Main from "../../components/Main";
+import DriveModal from "../../components/Modals/DriveModal";
 
 export default function DontationOverview() {
+  const [modal, setModal] = useState<boolean>(false);
+
   const { driveId } = useParams();
 
   if (!driveId) {
@@ -34,6 +38,19 @@ export default function DontationOverview() {
 
   return (
     <>
+      <DriveModal
+        title="Edit Drive"
+        buttonLabel="Update"
+        isOpen={modal}
+        mutationMethod={putDrive}
+        bloodAmount={drive.amount}
+        bloodType={{ value: drive.bloodType, label: drive.bloodType }}
+        date={drive.date.toString()}
+        urgency={drive.urgency}
+        onClose={() => {
+          setModal(false);
+        }}
+      />
       <Navbar hospitalName="DZ Hospital" />
       <Main>
         <Title title="Drive Overview">
@@ -41,7 +58,9 @@ export default function DontationOverview() {
             title="Edit"
             Icon={Settings}
             iconStyles={{ stroke: "white", marginLeft: 5, marginRight: 5 }}
-            onClick={() => {}}
+            onClick={() => {
+              setModal(!modal);
+            }}
           />
           <Action
             title="Close"

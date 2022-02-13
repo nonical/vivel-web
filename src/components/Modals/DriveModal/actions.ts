@@ -35,3 +35,22 @@ export async function postDrive(formData: FormData): Promise<Drive> {
 
   return json;
 }
+
+export async function putDrive(
+  formData: any,
+  driveId?: string
+): Promise<Drive> {
+  const body = formDataToDrive(formData);
+
+  const res = await fetch(ENDPOINTS.Drives + `/${driveId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
+  });
+
+  const json = await res.json();
+
+  return json;
+}

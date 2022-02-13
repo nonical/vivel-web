@@ -9,6 +9,7 @@ import { DropdownOption } from "../../Dropdown";
 import styles from "./DriveModal.module.css";
 import { Drive as DriveModel } from "./actions";
 import Modal from "../Modal";
+import { useParams } from "react-router-dom";
 
 interface DriveModalProps {
   title: string;
@@ -19,7 +20,7 @@ interface DriveModalProps {
   bloodType?: DropdownOption;
   urgency?: boolean;
   onClose: () => void;
-  mutationMethod: (body: FormData) => Promise<DriveModel>;
+  mutationMethod: (body: FormData, driveId?: string) => Promise<DriveModel>;
 }
 
 export default function DriveModal(props: DriveModalProps) {
@@ -34,21 +35,30 @@ export default function DriveModal(props: DriveModalProps) {
     { value: "AB-", label: "AB-" },
   ];
 
+  const dateInputFormat = (date?: any) => {
+    return new Date(date || new Date()).toISOString().split("T")[0];
+  };
+
   const [bloodType, setBloodType] = React.useState<string | undefined>(
     props.bloodType?.value || bloodTypes[0].value
   );
   const [urgency, setUrgency] = React.useState<boolean>(props.urgency || false);
 
-  const mutation = useMutation(async (data: FormData) => {
-    await props.mutationMethod(data);
+  const mutation = useMutation(async ({ formData, driveId }: any) => {
+    await props.mutationMethod(formData, driveId);
   });
+
+  const { driveId } = useParams();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const data = new FormData(e.target.form);
-    await mutation.mutateAsync(data, {
-      onSuccess: props.onClose,
-    });
+    await mutation.mutateAsync(
+      { formData: data, driveId: driveId },
+      {
+        onSuccess: props.onClose,
+      }
+    );
   };
 
   return (
@@ -95,8 +105,8 @@ export default function DriveModal(props: DriveModalProps) {
               type="date"
               id={"date"}
               name={"date"}
-              min={new Date().toISOString().split("T")[0]}
-              value={props.date}
+              min={dateInputFormat()}
+              value={dateInputFormat(props.date)}
               className={styles["date-input"]}
             />
           </div>
