@@ -15,9 +15,12 @@ import { ReactComponent as Settings } from "../../assets/settings.svg";
 import Action from "../../components/Action";
 import Main from "../../components/Main";
 import DriveModal from "../../components/Modals/DriveModal";
+import FinishDonation from "../../components/Modals/FinishDonation";
 
 export default function DontationOverview() {
   const [driveModal, setDriveModal] = useState<boolean>(false);
+
+  const [donationId, setDonationId] = useState<string>("");
   const [donationModal, setDonationModal] = useState<boolean>(false);
 
   const { driveId } = useParams();
@@ -50,6 +53,14 @@ export default function DontationOverview() {
         urgency={drive.urgency}
         onClose={() => {
           setDriveModal(false);
+        }}
+      />
+      <FinishDonation
+        title="Finish donation"
+        isOpen={donationModal}
+        donationId={donationId}
+        onClose={() => {
+          setDonationModal(false);
         }}
       />
       <Navbar hospitalName="DZ Hospital" />
@@ -97,7 +108,10 @@ export default function DontationOverview() {
                     .map((x) => (
                       <tr
                         key={x.userId}
-                        onClick={() => setDonationModal(!donationModal)}
+                        onClick={() => {
+                          setDonationId(x.donationId);
+                          setDonationModal(!donationModal);
+                        }}
                       >
                         <td>{x.userId}</td>
                         <td>{toDateFormat(x.scheduledAt!)}</td>

@@ -8,7 +8,12 @@ export default {
 } as ComponentMeta<typeof FinishDonation>;
 
 const Template: ComponentStory<typeof FinishDonation> = () => (
-  <FinishDonation />
+  <FinishDonation
+    title="Finish donation"
+    isOpen={true}
+    onClose={() => {}}
+    donationId=""
+  />
 );
 
 export const Primary = Template.bind({});
