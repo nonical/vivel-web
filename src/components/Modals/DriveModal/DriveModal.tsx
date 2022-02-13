@@ -68,6 +68,7 @@ export default function DriveModal(props: DriveModalProps) {
           id={"status"}
           name={"status"}
           value={"Open"}
+          readOnly={true}
         />
         <input
           type="text"
@@ -75,6 +76,7 @@ export default function DriveModal(props: DriveModalProps) {
           id={"hospitalId"}
           name={"hospitalId"}
           value={""}
+          readOnly={true}
         />
         <div className={modalStyles["input-container"]}>
           <Input
@@ -111,7 +113,9 @@ export default function DriveModal(props: DriveModalProps) {
               id={"date"}
               name={"date"}
               min={DateTime.now().toISODate()}
-              value={props.date?.toISODate() ?? DateTime.now().toISODate()}
+              defaultValue={
+                props.date?.toISODate() ?? DateTime.now().toISODate()
+              }
               className={styles["date-input"]}
             />
           </div>

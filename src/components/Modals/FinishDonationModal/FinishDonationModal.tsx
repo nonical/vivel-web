@@ -50,6 +50,7 @@ export default function FinishDonation(props: DonationModalProps) {
           id={"donationId"}
           name={"donationId"}
           value={props.donationId}
+          readOnly={true}
         />
         <div className={styles["input-container"]}>
           <input
