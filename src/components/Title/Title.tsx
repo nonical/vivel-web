@@ -14,7 +14,7 @@ export default function Title({ title, children }: TitleProps) {
         alignItems: "baseline",
         paddingTop: 30,
         paddingBottom: 15,
-        height: 70,
+        minHeight: 70,
         color: "white",
       }}
     >

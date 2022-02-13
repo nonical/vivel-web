@@ -7,19 +7,22 @@ import Switch from "../../Switch";
 import Button from "../../Button";
 import { DropdownOption } from "../../Dropdown";
 import styles from "./DriveModal.module.css";
+import modalStyles from "../Modal/Modal.module.css";
 import { Drive as DriveModel } from "./actions";
 import Modal from "../Modal";
+import { useParams } from "react-router-dom";
+import { DateTime } from "luxon";
 
 interface DriveModalProps {
   title: string;
   buttonLabel: string;
   isOpen: boolean;
-  date?: string;
+  date?: DateTime;
   bloodAmount?: number;
   bloodType?: DropdownOption;
   urgency?: boolean;
   onClose: () => void;
-  mutationMethod: (body: FormData) => Promise<DriveModel>;
+  mutationMethod: (body: FormData, driveId?: string) => Promise<DriveModel>;
 }
 
 export default function DriveModal(props: DriveModalProps) {
@@ -39,16 +42,21 @@ export default function DriveModal(props: DriveModalProps) {
   );
   const [urgency, setUrgency] = React.useState<boolean>(props.urgency || false);
 
-  const mutation = useMutation(async (data: FormData) => {
-    await props.mutationMethod(data);
+  const mutation = useMutation(async ({ formData, driveId }: any) => {
+    await props.mutationMethod(formData, driveId);
   });
+
+  const { driveId } = useParams();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     const data = new FormData(e.target.form);
-    await mutation.mutateAsync(data, {
-      onSuccess: props.onClose,
-    });
+    await mutation.mutateAsync(
+      { formData: data, driveId: driveId },
+      {
+        onSuccess: props.onClose,
+      }
+    );
   };
 
   return (
@@ -61,7 +69,7 @@ export default function DriveModal(props: DriveModalProps) {
           name={"hospitalId"}
           value={""}
         />
-        <div className={styles["input-container"]}>
+        <div className={modalStyles["input-container"]}>
           <Input
             label={"Blood amount"}
             name={"amount"}
@@ -69,7 +77,7 @@ export default function DriveModal(props: DriveModalProps) {
             defaultValue={props.bloodAmount?.toString()}
           />
         </div>
-        <div className={styles["input-container"]}>
+        <div className={modalStyles["input-container"]}>
           <input
             type="text"
             hidden={true}
@@ -86,7 +94,7 @@ export default function DriveModal(props: DriveModalProps) {
             }}
           />
         </div>
-        <div className={styles["input-container"]}>
+        <div className={modalStyles["input-container"]}>
           <div>
             <label htmlFor="date" className={styles["date-label"]}>
               Date
@@ -95,8 +103,8 @@ export default function DriveModal(props: DriveModalProps) {
               type="date"
               id={"date"}
               name={"date"}
-              min={new Date().toISOString().split("T")[0]}
-              value={props.date}
+              min={DateTime.now().toISODate()}
+              value={props.date?.toISODate() ?? DateTime.now().toISODate()}
               className={styles["date-input"]}
             />
           </div>
@@ -118,7 +126,7 @@ export default function DriveModal(props: DriveModalProps) {
           />
         </div>
         <div
-          className={`${styles["input-container"]} ${styles["submit-button"]}`}
+          className={`${modalStyles["input-container"]} ${modalStyles["submit-button"]}`}
         >
           <Button label={props.buttonLabel} onClick={handleSubmit} />
         </div>
