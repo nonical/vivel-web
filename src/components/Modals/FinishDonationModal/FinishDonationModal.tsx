@@ -6,6 +6,8 @@ import TextInput from "../../TextInput";
 
 import styles from "../Modal/Modal.module.css";
 import Modal from "../Modal";
+import { useMutation } from "react-query";
+import { putDonation } from "./actions";
 
 interface DonationModalProps {
   title: string;
@@ -16,18 +18,27 @@ interface DonationModalProps {
 
 export default function FinishDonation(props: DonationModalProps) {
   const donationStatuses = [
-    { value: "Successful", label: "Successful" },
-    { value: "Failed", label: "Failed" },
-    { value: "Canceled", label: "Canceled" },
+    { value: "Approved", label: "Approved" },
+    { value: "Rejected", label: "Rejected" },
   ];
 
   const [donationStatus, setdonationStatus] = React.useState<
     string | undefined
   >(donationStatuses[0].value);
 
-  const handleSubmit = (e: any) => {
+  const mutation = useMutation(async ({ formData, donationId }: any) => {
+    await putDonation(formData, donationId);
+  });
+
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const data = new FormData(e.target.form);
+    await mutation.mutateAsync(
+      { formData: data, donationId: props.donationId },
+      {
+        onSuccess: props.onClose,
+      }
+    );
   };
 
   return (
@@ -82,7 +93,7 @@ export default function FinishDonation(props: DonationModalProps) {
             </div>
           </>
         )}
-        {donationStatus != donationStatuses[0].value && (
+        {donationStatus == donationStatuses[1].value && (
           <div className={styles["input-container"]}>
             <TextInput
               label={"Note"}
