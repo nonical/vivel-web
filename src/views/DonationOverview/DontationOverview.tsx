@@ -15,7 +15,7 @@ import { ReactComponent as Settings } from "../../assets/settings.svg";
 import Action from "../../components/Action";
 import Main from "../../components/Main";
 import DriveModal from "../../components/Modals/DriveModal";
-import FinishDonation from "../../components/Modals/FinishDonation";
+import FinishDonationModal from "../../components/Modals/FinishDonationModal";
 
 export default function DontationOverview() {
   const [driveModal, setDriveModal] = useState<boolean>(false);
@@ -55,7 +55,7 @@ export default function DontationOverview() {
           setDriveModal(false);
         }}
       />
-      <FinishDonation
+      <FinishDonationModal
         title="Finish donation"
         isOpen={donationModal}
         donationId={donationId}

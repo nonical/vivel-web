@@ -1,14 +1,14 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import FinishDonation from "../../components/Modals/FinishDonation";
+import FinishDonationModal from "../../components/Modals/FinishDonationModal";
 
 export default {
   title: "Example/FinishDonation",
-  component: FinishDonation,
-} as ComponentMeta<typeof FinishDonation>;
+  component: FinishDonationModal,
+} as ComponentMeta<typeof FinishDonationModal>;
 
-const Template: ComponentStory<typeof FinishDonation> = () => (
-  <FinishDonation
+const Template: ComponentStory<typeof FinishDonationModal> = () => (
+  <FinishDonationModal
     title="Finish donation"
     isOpen={true}
     onClose={() => {}}
