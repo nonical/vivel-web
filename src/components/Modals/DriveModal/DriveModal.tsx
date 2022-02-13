@@ -12,6 +12,8 @@ import { Drive as DriveModel } from "./actions";
 import Modal from "../Modal";
 import { useParams } from "react-router-dom";
 import { DateTime } from "luxon";
+import { toast } from "react-toastify";
+import { displayErrors } from "../../../utils/toast";
 
 interface DriveModalProps {
   title: string;
@@ -55,6 +57,9 @@ export default function DriveModal(props: DriveModalProps) {
       { formData: data, driveId: driveId },
       {
         onSuccess: props.onClose,
+        onError: (error: any) => {
+          displayErrors(error);
+        },
       }
     );
   };

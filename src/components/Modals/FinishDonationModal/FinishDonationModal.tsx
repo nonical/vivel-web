@@ -8,6 +8,7 @@ import styles from "../Modal/Modal.module.css";
 import Modal from "../Modal";
 import { useMutation } from "react-query";
 import { putDonation } from "./actions";
+import { displayErrors } from "../../../utils/toast";
 
 interface DonationModalProps {
   title: string;
@@ -37,6 +38,9 @@ export default function FinishDonation(props: DonationModalProps) {
       { formData: data, donationId: props.donationId },
       {
         onSuccess: props.onClose,
+        onError: (error: any) => {
+          displayErrors(error);
+        },
       }
     );
   };
