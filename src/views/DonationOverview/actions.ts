@@ -1,39 +1,7 @@
 import { DateTime } from "luxon";
+import { Donation } from "../../interfaces/Donations";
+import { Drive, DriveDetails } from "../../interfaces/Drive";
 import { ENDPOINTS } from "../../utils/config";
-
-interface Drive {
-  amount: number;
-  bloodType: string;
-  createdAt: DateTime;
-  date: DateTime;
-  driveId: string;
-  hospitalId: string;
-  status: string;
-  updatedAt: DateTime | null;
-  urgency: boolean;
-}
-
-interface DriveDetails extends Drive {
-  amountLeft: number;
-  pendingCount: number;
-  scheduledCount: number;
-}
-
-interface Donation {
-  amount: number | null;
-  createdAt: DateTime;
-  donationId: string;
-  driveId: string;
-  erythrocyteCount: number | null;
-  leukocyteCount: number | null;
-  note: string;
-  plateletCount: number | null;
-  scheduledAt: DateTime | null;
-  status: string;
-  updatedAt: DateTime | null;
-  userId: string;
-  userName: string;
-}
 
 export async function fetchDriveById(driveId: string): Promise<DriveDetails> {
   const res = await fetch(ENDPOINTS.Drives + "/" + driveId + "/details");
