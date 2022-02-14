@@ -132,6 +132,7 @@ export default function DontationOverview() {
                           setDonationId(x.donationId);
                           setDonationModal(!donationModal);
                         }}
+                        className={styles.tr}
                       >
                         <td>{x.userName}</td>
                         <td>{toDateFormat(x.scheduledAt!)}</td>
@@ -157,7 +158,7 @@ export default function DontationOverview() {
                   {donations
                     .filter((x) => x.status === "Pending")
                     .map((x) => (
-                      <tr key={x.userId}>
+                      <tr key={x.userId} className={styles.tr}>
                         <td>{x.userName}</td>
                         <td>{toDateFormat(x.createdAt)}</td>
                         <td>{toTimeFormat(x.createdAt)}</td>
