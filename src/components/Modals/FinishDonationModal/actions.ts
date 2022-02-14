@@ -38,7 +38,7 @@ export async function putDonation(
     body: JSON.stringify(body),
   });
 
-  const json = await res.json();
+  if (!res.ok) throw new Error(await res.text());
 
-  return json;
+  return res.json();
 }

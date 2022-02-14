@@ -33,9 +33,9 @@ export async function postDrive(formData: FormData): Promise<Drive> {
     body: JSON.stringify(body),
   });
 
-  const json = await res.json();
+  if (!res.ok) throw new Error(await res.text());
 
-  return json;
+  return res.json();
 }
 
 export async function putDrive(
@@ -52,7 +52,7 @@ export async function putDrive(
     body: JSON.stringify(body),
   });
 
-  const json = await res.json();
+  if (!res.ok) throw new Error(await res.text());
 
-  return json;
+  return res.json();
 }
