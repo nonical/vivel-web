@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useMutation, useQuery } from "react-query";
+import { useNavigate, useParams } from "react-router-dom";
 import Container from "../../components/Container";
 import DriveOverview from "../../components/DriveOverview";
 import Navbar from "../../components/Navbar";
 import Table from "../../components/Table";
 import Title from "../../components/Title";
 import { toDateFormat, toTimeFormat } from "../../utils/date";
-import { fetchDriveById, fetchDriveDonations } from "./actions";
+import { closeDrive, fetchDriveById, fetchDriveDonations } from "./actions";
 import { putDrive } from "../../components/Modals/DriveModal/actions";
 import styles from "./DriveOverview.module.css";
 import { ReactComponent as XCircle } from "../../assets/x-circle.svg";
@@ -24,6 +24,7 @@ export default function DontationOverview() {
   const [donationModal, setDonationModal] = useState<boolean>(false);
 
   const { driveId } = useParams();
+  const navigate = useNavigate();
 
   if (!driveId) {
     throw new Error();
@@ -78,7 +79,18 @@ export default function DontationOverview() {
             title="Close"
             Icon={XCircle}
             iconStyles={{ stroke: "white", marginLeft: 5, marginRight: 5 }}
-            onClick={() => {}}
+            onClick={async () => {
+              if (
+                window.confirm("Are you sure you want to close this drive?")
+              ) {
+                const success = await closeDrive(drive);
+
+                if (success) {
+                  // TODO: Add toast here
+                  navigate("/drives");
+                }
+              }
+            }}
           />
         </Title>
         <Container>

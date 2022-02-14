@@ -64,3 +64,20 @@ export async function fetchDriveDonations(
 
   return donations;
 }
+
+export async function closeDrive(drive: Drive) {
+  const res = await fetch(ENDPOINTS.Drives + "/" + drive.driveId, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ...drive,
+      status: "Closed",
+    }),
+  });
+
+  if (!res.ok) throw new Error(await res.text());
+
+  return res.json();
+}
