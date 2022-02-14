@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
+import { ReactComponent as Settings } from "../../assets/settings.svg";
+import { ReactComponent as XCircle } from "../../assets/x-circle.svg";
+import Action from "../../components/Action";
 import Container from "../../components/Container";
 import DriveOverview from "../../components/DriveOverview";
+import Main from "../../components/Main";
+import DriveModal from "../../components/Modals/DriveModal";
+import { putDrive } from "../../components/Modals/DriveModal/actions";
+import FinishDonationModal from "../../components/Modals/FinishDonationModal";
 import Navbar from "../../components/Navbar";
 import Table from "../../components/Table";
 import Title from "../../components/Title";
 import { toDateFormat, toTimeFormat } from "../../utils/date";
+import { displayErrors, displaySuccess } from "../../utils/toast";
 import { closeDrive, fetchDriveById, fetchDriveDonations } from "./actions";
-import { putDrive } from "../../components/Modals/DriveModal/actions";
 import styles from "./DriveOverview.module.css";
-import { ReactComponent as XCircle } from "../../assets/x-circle.svg";
-import { ReactComponent as Settings } from "../../assets/settings.svg";
-import Action from "../../components/Action";
-import Main from "../../components/Main";
-import DriveModal from "../../components/Modals/DriveModal";
-import FinishDonationModal from "../../components/Modals/FinishDonationModal";
 
 export default function DontationOverview() {
   const [driveModal, setDriveModal] = useState<boolean>(false);
@@ -36,9 +37,21 @@ export default function DontationOverview() {
   const { data: donations } = useQuery(["drives", "donations", driveId], () =>
     fetchDriveDonations(driveId)
   );
+  const closeDriveMutation = useMutation(closeDrive);
 
   if (!drive || !donations) {
     return <></>;
+  }
+
+  if (closeDriveMutation.isSuccess) {
+    closeDriveMutation.reset();
+    displaySuccess(`Drive closed!`);
+    navigate("/drives");
+  }
+
+  if (closeDriveMutation.isError) {
+    displayErrors(closeDriveMutation.error);
+    closeDriveMutation.reset();
   }
 
   return (
@@ -83,12 +96,7 @@ export default function DontationOverview() {
               if (
                 window.confirm("Are you sure you want to close this drive?")
               ) {
-                const success = await closeDrive(drive);
-
-                if (success) {
-                  // TODO: Add toast here
-                  navigate("/drives");
-                }
+                closeDriveMutation.mutate(drive);
               }
             }}
           />
@@ -97,7 +105,7 @@ export default function DontationOverview() {
           <DriveOverview
             bloodType={drive.bloodType}
             date={toDateFormat(drive.date)}
-            litresToGo={drive.amountLeft / 1000}
+            litresToGo={parseFloat((drive.amountLeft / 1000).toFixed(2))}
             pendingCount={drive.pendingCount}
             scheduledCount={drive.scheduledCount}
           />
