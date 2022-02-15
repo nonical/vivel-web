@@ -41,3 +41,8 @@ h3 {
 .fill {
   flex: 1 1 0;
 }
+
+.tr:hover {
+  background-color: #fbe4e8;
+  cursor: pointer;
+}
