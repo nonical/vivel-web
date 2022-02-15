@@ -10,34 +10,41 @@ import Main from "../../components/Main";
 import DriveModal from "../../components/Modals/DriveModal";
 import { putDrive } from "../../components/Modals/DriveModal/actions";
 import FinishDonationModal from "../../components/Modals/FinishDonationModal";
+import ScheduleDonationModal from "../../components/Modals/ScheduledPendingModal";
 import Navbar from "../../components/Navbar";
 import Table from "../../components/Table";
 import Title from "../../components/Title";
+import { Donation } from "../../interfaces/Donations";
 import { toDateFormat, toTimeFormat } from "../../utils/date";
 import { displayErrors, displaySuccess } from "../../utils/toast";
-import { closeDrive, fetchDriveById, fetchDriveDonations } from "./actions";
+import {
+  closeDrive,
+  fetchDriveById,
+  fetchDriveDonations,
+  updateDonation,
+} from "./actions";
 import styles from "./DriveOverview.module.css";
 
 export default function DontationOverview() {
-  const [driveModal, setDriveModal] = useState<boolean>(false);
+  const [donation, setDonation] = useState<Donation | null>(null);
 
-  const [donationId, setDonationId] = useState<string>("");
-  const [donationModal, setDonationModal] = useState<boolean>(false);
+  const [showEditDriveModal, setEditDriveModal] = useState<boolean>(false);
+  const [showResolveDonationModal, setResolveDonationModal] = useState(false);
+  const [showScheduleDonationModal, setShowScheduleDonationModal] =
+    useState(false);
 
   const { driveId } = useParams();
   const navigate = useNavigate();
 
-  if (!driveId) {
-    throw new Error();
-  }
-
   const { data: drive } = useQuery(["drives", driveId], () =>
-    fetchDriveById(driveId)
+    fetchDriveById(driveId!)
   );
   const { data: donations } = useQuery(["drives", "donations", driveId], () =>
-    fetchDriveDonations(driveId)
+    fetchDriveDonations(driveId!)
   );
+
   const closeDriveMutation = useMutation(closeDrive);
+  const updateDonationMutation = useMutation(updateDonation);
 
   if (!drive || !donations) {
     return <></>;
@@ -45,7 +52,7 @@ export default function DontationOverview() {
 
   if (closeDriveMutation.isSuccess) {
     closeDriveMutation.reset();
-    displaySuccess(`Drive closed!`);
+    displaySuccess("Drive closed!");
     navigate("/drives");
   }
 
@@ -54,27 +61,50 @@ export default function DontationOverview() {
     closeDriveMutation.reset();
   }
 
+  if (updateDonationMutation.isSuccess) {
+    displaySuccess("Donation updated!");
+    navigate(0);
+  }
+
+  if (updateDonationMutation.isError) {
+    displayErrors(updateDonationMutation.error);
+  }
+
   return (
     <>
       <DriveModal
         title="Edit Drive"
         buttonLabel="Update"
-        isOpen={driveModal}
+        isOpen={showEditDriveModal}
         mutationMethod={putDrive}
         bloodAmount={drive.amount}
         bloodType={{ value: drive.bloodType, label: drive.bloodType }}
         date={drive.date}
         urgency={drive.urgency}
         onClose={() => {
-          setDriveModal(false);
+          setEditDriveModal(false);
         }}
       />
       <FinishDonationModal
         title="Finish donation"
-        isOpen={donationModal}
-        donationId={donationId}
+        isOpen={showResolveDonationModal}
+        donationId={donation?.donationId!}
         onClose={() => {
-          setDonationModal(false);
+          setResolveDonationModal(false);
+        }}
+      />
+      <ScheduleDonationModal
+        title="Schedule Donation"
+        isOpen={showScheduleDonationModal}
+        onClose={() => {
+          setShowScheduleDonationModal(false);
+        }}
+        onSubmit={(scheduledDateTime) => {
+          updateDonationMutation.mutate({
+            ...donation!,
+            status: "Scheduled",
+            scheduledAt: scheduledDateTime,
+          });
         }}
       />
       <Navbar hospitalName="DZ Hospital" />
@@ -85,7 +115,7 @@ export default function DontationOverview() {
             Icon={Settings}
             iconStyles={{ stroke: "white", marginLeft: 5, marginRight: 5 }}
             onClick={() => {
-              setDriveModal(!driveModal);
+              setEditDriveModal(!showEditDriveModal);
             }}
           />
           <Action
@@ -129,8 +159,8 @@ export default function DontationOverview() {
                       <tr
                         key={x.userId}
                         onClick={() => {
-                          setDonationId(x.donationId);
-                          setDonationModal(!donationModal);
+                          setDonation(x);
+                          setResolveDonationModal(!showResolveDonationModal);
                         }}
                         className={styles.tr}
                       >
@@ -158,7 +188,14 @@ export default function DontationOverview() {
                   {donations
                     .filter((x) => x.status === "Pending")
                     .map((x) => (
-                      <tr key={x.userId} className={styles.tr}>
+                      <tr
+                        key={x.userId}
+                        className={styles.tr}
+                        onClick={() => {
+                          setDonation(x);
+                          setShowScheduleDonationModal(true);
+                        }}
+                      >
                         <td>{x.userName}</td>
                         <td>{toDateFormat(x.createdAt)}</td>
                         <td>{toTimeFormat(x.createdAt)}</td>
