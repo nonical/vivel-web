@@ -49,3 +49,18 @@ export async function closeDrive(drive: Drive) {
 
   return res.json();
 }
+
+// TODO: Update other actions to use this action (updating donations in scheduled donations list)
+export async function updateDonation(donation: Donation) {
+  const res = await fetch(ENDPOINTS.Donations + "/" + donation.donationId, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(donation),
+  });
+
+  if (!res.ok) throw new Error(await res.text());
+
+  return res.json();
+}
