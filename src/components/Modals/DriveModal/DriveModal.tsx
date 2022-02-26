@@ -14,6 +14,7 @@ import { useParams } from "react-router-dom";
 import { DateTime } from "luxon";
 import { toast } from "react-toastify";
 import { displayErrors, displaySuccess } from "../../../utils/toast";
+import { bloodTypes } from "../../../constants/constants"
 
 interface DriveModalProps {
   title: string;
@@ -28,17 +29,6 @@ interface DriveModalProps {
 }
 
 export default function DriveModal(props: DriveModalProps) {
-  const bloodTypes = [
-    { value: "O+", label: "O+" },
-    { value: "O-", label: "O-" },
-    { value: "A+", label: "A+" },
-    { value: "A-", label: "A-" },
-    { value: "B+", label: "B+" },
-    { value: "B-", label: "B-" },
-    { value: "AB+", label: "AB+" },
-    { value: "AB-", label: "AB-" },
-  ];
-
   const [bloodType, setBloodType] = React.useState<string | undefined>(
     props.bloodType?.value || bloodTypes[0].value
   );
