@@ -9,7 +9,7 @@ import Modal from "../Modal";
 import { useMutation } from "react-query";
 import { putDonation } from "./actions";
 import { displayErrors, displaySuccess } from "../../../utils/toast";
-
+import { bloodTypes, donationStatuses } from "../../../constants/constants"
 interface DonationModalProps {
   title: string;
   isOpen: boolean;
@@ -18,14 +18,15 @@ interface DonationModalProps {
 }
 
 export default function FinishDonation(props: DonationModalProps) {
-  const donationStatuses = [
-    { value: "Approved", label: "Approved" },
-    { value: "Rejected", label: "Rejected" },
-  ];
+  
+  const [bloodType, setBloodTypeStatus] = React.useState<
+  string | undefined
+>(bloodTypes[0].value);
 
   const [donationStatus, setdonationStatus] = React.useState<
     string | undefined
   >(donationStatuses[0].value);
+
 
   const mutation = useMutation(async ({ formData, donationId }: any) => {
     await putDonation(formData, donationId);
@@ -102,6 +103,7 @@ export default function FinishDonation(props: DonationModalProps) {
           </>
         )}
         {donationStatus == donationStatuses[1].value && (
+          <>
           <div className={styles["input-container"]}>
             <TextInput
               label={"Note"}
@@ -109,6 +111,24 @@ export default function FinishDonation(props: DonationModalProps) {
               placeholder={"Enter note here..."}
             />
           </div>
+          <div className={styles["input-container"]}>
+          <input
+            type="text"
+            hidden={true}
+            id={"bloodType"}
+            name={"bloodType"}
+            value={bloodType}
+          />
+          <Dropdown
+            options={bloodTypes}
+            label={"User blood type"}
+            selected={bloodTypes[0]}
+            onChange={(value) => {
+              setBloodTypeStatus(value?.value);
+            }}
+          />
+        </div>
+          </>
         )}
         <div
           className={`${styles["input-container"]} ${styles["submit-button"]}`}

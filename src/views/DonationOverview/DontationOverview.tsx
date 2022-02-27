@@ -164,9 +164,9 @@ export default function DontationOverview() {
                         }}
                         className={styles.tr}
                       >
-                        <td>{x.userName}</td>
-                        <td>{toDateFormat(x.scheduledAt!)}</td>
-                        <td>{toTimeFormat(x.scheduledAt!)}</td>
+                        <td className={styles.td}>{x.userName}</td>
+                        <td className={styles.td}>{toDateFormat(x.scheduledAt!)}</td>
+                        <td className={styles.td}>{toTimeFormat(x.scheduledAt!)}</td>
                       </tr>
                     ))}
                 </tbody>
@@ -196,9 +196,9 @@ export default function DontationOverview() {
                           setShowScheduleDonationModal(true);
                         }}
                       >
-                        <td>{x.userName}</td>
-                        <td>{toDateFormat(x.createdAt)}</td>
-                        <td>{toTimeFormat(x.createdAt)}</td>
+                        <td className={styles.td}>{x.userName}</td>
+                        <td className={styles.td}>{toDateFormat(x.createdAt)}</td>
+                        <td className={styles.td}>{toTimeFormat(x.createdAt)}</td>
                       </tr>
                     ))}
                 </tbody>

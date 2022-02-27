@@ -1,6 +1,7 @@
 textarea {
   outline: none;
   resize: none;
-  height: 200px;
+  height: 100px;
   min-width: 325px;
+  border: 1px solid #FF98A8;
 }

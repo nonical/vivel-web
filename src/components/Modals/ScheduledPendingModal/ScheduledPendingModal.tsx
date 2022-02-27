@@ -36,7 +36,7 @@ export default function ScheduleDonationModal(
           />
         </div>
       </div>
-      <div className={modalStyles["input-container"]}>
+      <div className={modalStyles["submit-button"]}>
         <Button
           label="Schedule donation"
           onClick={() => {
