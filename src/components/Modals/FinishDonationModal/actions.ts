@@ -7,6 +7,7 @@ export interface Donation {
   leukocyteCount: number;
   erythrocyteCount: number;
   plateletCount: number;
+  bloodType: string;
 }
 
 const formDataToDonation = (formData: FormData) => {
@@ -19,6 +20,7 @@ const formDataToDonation = (formData: FormData) => {
       (formData.get("erythrocyteCount") as string) ?? 0
     ),
     plateletCount: parseInt((formData.get("plateletCount") as string) ?? 0),
+    bloodType: formData.get("bloodType") as string
   };
 
   return body;
