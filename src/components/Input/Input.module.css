@@ -55,18 +55,10 @@
     drop-shadow(0px 4px 8px rgba(50, 50, 71, 0.06));
 }
 
-.main input:valid {
-  /* Colors/Primary/Green */
-  border: 1px solid #00c48c;
-
-  /* Colors/Primary/Green */
-  color: #00c48c;
-}
-
-.main input:invalid {
+.main input {
   /* Colors/Primary/Red */
-  border: 1px solid #ff647c;
+  border: 1px solid #FF98A8;
 
   /* Colors/Primary/Red */
-  color: #ff647c;
+  color: #FF98A8;
 }
