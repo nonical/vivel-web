@@ -1,20 +1,13 @@
 import React, { useRef } from "react";
 import { useMutation } from "react-query";
 
-import Input from "../../Input";
 import Dropdown from "../../Dropdown";
-import Switch from "../../Switch";
 import Button from "../../Button";
-import { DropdownOption } from "../../Dropdown";
 import styles from "../DriveModal/DriveModal.module.css";
 import modalStyles from "../Modal/Modal.module.css";
-// import { Drive as DriveModel } from "./actions";
 import Modal from "../Modal";
-import { useParams } from "react-router-dom";
 import { DateTime } from "luxon";
-import { toast } from "react-toastify";
-import { displayErrors, displaySuccess } from "../../../utils/toast";
-import { bloodTypes } from "../../../constants/constants";
+import { displayErrors } from "../../../utils/toast";
 
 interface DriveReportModalProps {
   title: string;
