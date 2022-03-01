@@ -1,0 +1,110 @@
+import React, { useRef } from "react";
+import { useMutation } from "react-query";
+
+import Dropdown from "../../Dropdown";
+import Button from "../../Button";
+import styles from "../DriveModal/DriveModal.module.css";
+import modalStyles from "../Modal/Modal.module.css";
+import Modal from "../Modal";
+import { DateTime } from "luxon";
+
+import { displayErrors } from "../../../utils/toast";
+
+
+interface BloodTypeLitresReportModalProps {
+  title: string;
+  buttonLabel: string;
+  isOpen: boolean;
+  onClose: () => void;
+  mutationMethod: (body: FormData, hospitalId: string) => {};
+}
+
+const urgencyStatuses = [
+    {value: "All", label: "All"},
+    {value: "Routine", label: "Routine"},
+    {value: "Urgent", label: "Urgent"}
+]
+
+export default function BloodTypeLitresReportModal(props: BloodTypeLitresReportModalProps) {
+      const [urgencyStatus, setUrgencyStatus] = React.useState<string | undefined>(
+        urgencyStatuses[0].value
+      );
+
+      const mutation = useMutation(async ({ formData, hospitalId }: any) => {
+        await props.mutationMethod(formData, hospitalId);
+      });
+
+      const handleSubmit = async (e: any) => {
+        e.preventDefault();
+        const data = new FormData(e.target.form);
+        await mutation.mutateAsync(
+          // TODO: add hospitalID
+          { formData: data, hospitalId: "" },
+          {
+            onSuccess: () => {
+              props.onClose();
+            },
+            onError: (error: any) => {
+              displayErrors(error);
+            },
+          }
+        );
+      };
+
+  return (
+    <Modal {...props}>
+      <form>
+        <div className={modalStyles["input-container"]}>
+          <div>
+            <label htmlFor="from" className={styles["date-label"]}>
+              From
+            </label>
+            <input
+              type="date"
+              id={"from"}
+              name={"from"}
+              max={DateTime.now().toISODate()}
+              className={styles["date-input"]}
+            />
+          </div>
+        </div>
+        <div className={modalStyles["input-container"]}>
+          <div>
+            <label htmlFor="to" className={styles["date-label"]}>
+              To
+            </label>
+            <input
+              type="date"
+              id={"to"}
+              name={"to"}
+              max={DateTime.now().toISODate()}
+              className={styles["date-input"]}
+            />
+          </div>
+        </div>
+        <div className={modalStyles["input-container"]}>
+          <input
+            type="text"
+            hidden={true}
+            id={"urgency"}
+            name={"urgency"}
+            value={urgencyStatus}
+          />
+          <Dropdown
+            options={urgencyStatuses}
+            selected={urgencyStatuses[0]}
+            label={"Urgency"}
+            onChange={(value) => {
+              setUrgencyStatus(value?.value);
+            }}
+          />
+        </div>
+        <div
+          className={`${modalStyles["input-container"]} ${modalStyles["submit-button"]}`}
+        >
+          <Button label={props.buttonLabel} onClick={handleSubmit} />
+        </div>
+      </form>
+    </Modal>
+  );
+}
