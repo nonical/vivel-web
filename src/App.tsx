@@ -29,6 +29,14 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/redirect" element={<Redirect />} />
               <Route
+                path="/reports"
+                element={
+                  <Protected>
+                    <Report />
+                  </Protected>
+                }
+              />
+              <Route
                 path="/drives"
                 element={
                   <Protected>

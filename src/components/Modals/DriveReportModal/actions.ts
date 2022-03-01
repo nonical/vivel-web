@@ -1,4 +1,5 @@
 import { ENDPOINTS } from "../../../utils/config";
+import fetch from "../../../utils/fetch";
 
 export interface DriveReport {
   hospitalId: string;
