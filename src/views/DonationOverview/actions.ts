@@ -2,6 +2,7 @@ import { DateTime } from "luxon";
 import { Donation } from "../../interfaces/Donations";
 import { Drive, DriveDetails } from "../../interfaces/Drive";
 import { ENDPOINTS } from "../../utils/config";
+import fetch from "../../utils/fetch";
 
 export async function fetchDriveById(driveId: string): Promise<DriveDetails> {
   const res = await fetch(ENDPOINTS.Drives + "/" + driveId + "/details");

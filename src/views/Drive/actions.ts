@@ -1,6 +1,6 @@
-import { ENDPOINTS } from "../../utils/config";
-import { toDateFormat } from "../../utils/date";
 import { DateTime } from "luxon";
+import { ENDPOINTS } from "../../utils/config";
+import fetch from "../../utils/fetch";
 
 export interface Drive {
   amount: number;
