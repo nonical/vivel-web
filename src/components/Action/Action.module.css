@@ -1,6 +1,7 @@
 .action {
   display: flex;
   align-items: center;
+  justify-content: end;
   margin-right: 30px;
   cursor: pointer;
 }

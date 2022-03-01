@@ -1,4 +1,5 @@
 import { ENDPOINTS } from "../../../utils/config";
+import fetch from "../../../utils/fetch";
 
 export interface Donation {
   donationId: string;
@@ -20,7 +21,7 @@ const formDataToDonation = (formData: FormData) => {
       (formData.get("erythrocyteCount") as string) ?? 0
     ),
     plateletCount: parseInt((formData.get("plateletCount") as string) ?? 0),
-    bloodType: formData.get("bloodType") as string
+    bloodType: formData.get("bloodType") as string,
   };
 
   return body;
