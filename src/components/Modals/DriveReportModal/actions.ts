@@ -1,8 +1,8 @@
+import { getDecodedAccessToken } from "../../../utils/auth";
 import { ENDPOINTS } from "../../../utils/config";
 import fetch from "../../../utils/fetch";
 
 export interface DriveReport {
-  hospitalId: string;
   from: string;
   to: string;
   status: string;
@@ -28,8 +28,9 @@ const formDataToQueryString = (formData: FormData) => {
   return queryString;
 };
 
-export async function fetchDriveReport(formData: FormData, hospitalId: string) {
+export async function fetchDriveReport(formData: FormData) {
   let queryString = formDataToQueryString(formData);
+  const hospitalId = getDecodedAccessToken().hospital;
 
   const res = await fetch(
     ENDPOINTS.Hospitals + `/${hospitalId}/report/drives` + queryString

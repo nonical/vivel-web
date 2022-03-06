@@ -14,50 +14,49 @@ interface DriveReportModalProps {
   buttonLabel: string;
   isOpen: boolean;
   onClose: () => void;
-  mutationMethod: (body: FormData, hospitalId: string) => {};
+  mutationMethod: (body: FormData) => {};
 }
 
 const driveStatuses = [
-    {value: "All", label: "All"},
-    {value: "Open", label: "Open"},
-    {value: "Closed", label: "Closed"}
-]
+  { value: "All", label: "All" },
+  { value: "Open", label: "Open" },
+  { value: "Closed", label: "Closed" },
+];
 
 const urgencyStatuses = [
-    {value: "All", label: "All"},
-    {value: "Routine", label: "Routine"},
-    {value: "Urgent", label: "Urgent"}
-]
+  { value: "All", label: "All" },
+  { value: "Routine", label: "Routine" },
+  { value: "Urgent", label: "Urgent" },
+];
 
 export default function DriveReportModal(props: DriveReportModalProps) {
-    const [driveStatus, setDriveStatus] = React.useState<string | undefined>(
-        driveStatuses[0].value
-      );
+  const [driveStatus, setDriveStatus] = React.useState<string | undefined>(
+    driveStatuses[0].value
+  );
 
-      const [urgencyStatus, setUrgencyStatus] = React.useState<string | undefined>(
-        urgencyStatuses[0].value
-      );
+  const [urgencyStatus, setUrgencyStatus] = React.useState<string | undefined>(
+    urgencyStatuses[0].value
+  );
 
-      const mutation = useMutation(async ({ formData, hospitalId }: any) => {
-        await props.mutationMethod(formData, hospitalId);
-      });
+  const mutation = useMutation(async ({ formData }: any) => {
+    await props.mutationMethod(formData);
+  });
 
-      const handleSubmit = async (e: any) => {
-        e.preventDefault();
-        const data = new FormData(e.target.form);
-        await mutation.mutateAsync(
-          // TODO: add hospitalid
-          { formData: data, hospitalId: "" },
-          {
-            onSuccess: () => {
-              props.onClose();
-            },
-            onError: (error: any) => {
-              displayErrors(error);
-            },
-          }
-        );
-      };
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const data = new FormData(e.target.form);
+    await mutation.mutateAsync(
+      { formData: data },
+      {
+        onSuccess: () => {
+          props.onClose();
+        },
+        onError: (error: any) => {
+          displayErrors(error);
+        },
+      }
+    );
+  };
 
   return (
     <Modal {...props}>
