@@ -31,7 +31,7 @@ export default function Navbar() {
         ></Pill>
       </div>
       <div className={styles.actions}>
-        <Link to="/drives" style={{ textDecoration: "none" }}>
+        <Link to="/drives" className={styles.link}>
           <Action
             Icon={Heart}
             iconStyles={{
@@ -41,7 +41,7 @@ export default function Navbar() {
             title={"Drives"}
           />
         </Link>
-        <Link to="/reports" style={{ textDecoration: "none" }}>
+        <Link to="/reports" className={styles.link}>
           <Action
             Icon={PieChart}
             iconStyles={{

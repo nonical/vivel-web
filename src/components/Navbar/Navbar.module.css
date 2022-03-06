@@ -16,6 +16,16 @@
   width: 33%;
 }
 
+.link {
+  text-decoration: none;
+  font-size: 22px;
+  font-weight: normal;
+}
+.link:visited {
+  text-decoration: none;
+  color: black;
+}
+
 @media (max-width: 640px) {
   .pill-container {
     display: none;
