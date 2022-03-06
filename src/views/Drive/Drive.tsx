@@ -51,7 +51,7 @@ export default function Drive() {
           setModal(false);
         }}
       />
-      <Navbar hospitalName="DZ Hospital" />
+      <Navbar />
       <Main>
         <Title title={"Drives"}>
           <Switch
@@ -85,7 +85,13 @@ export default function Drive() {
               <tbody>
                 {drives?.map((drive) => {
                   return (
-                    <tr key={drive.driveId} onClick={() => {navigate(`/drives/${drive.driveId}`)}} className={styles.tr}>
+                    <tr
+                      key={drive.driveId}
+                      onClick={() => {
+                        navigate(`/drives/${drive.driveId}`);
+                      }}
+                      className={styles.tr}
+                    >
                       <td className={styles.td}>{toDateFormat(drive.date)}</td>
                       <td className={styles.td}>{drive.amount}L</td>
                       <td className={styles.td}>{drive.bloodType}</td>

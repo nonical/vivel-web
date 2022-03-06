@@ -17,6 +17,7 @@ import {
   TokenResponse,
 } from "@openid/appauth";
 import { IDENTITY } from "./config";
+import jwtDecode from "jwt-decode";
 
 const CLIENT_ID = "vivel.web";
 const REDIRECT_URI = "http://localhost:3000/redirect";
@@ -113,4 +114,8 @@ export function getTokens() {
     refreshToken: localStorage.getItem("refreshToken"),
     idToken: localStorage.getItem("idToken"),
   };
+}
+
+export function getDecodedAccessToken(): any {
+  return jwtDecode(localStorage.getItem("accessToken")!);
 }

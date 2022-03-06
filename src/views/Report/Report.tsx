@@ -36,7 +36,7 @@ export default function Report() {
           setBloodTypeModal(false);
         }}
       />
-      <Navbar hospitalName="DZ Hospital" />
+      <Navbar />
       <Main>
         <Title title={"Reports"} />
         <Container>
@@ -68,7 +68,10 @@ export default function Report() {
                     />
                   </td>
                 </tr>
-                <tr className={styles.tr} onClick={() => setBloodTypeModal(true)}>
+                <tr
+                  className={styles.tr}
+                  onClick={() => setBloodTypeModal(true)}
+                >
                   <td
                     style={{ textAlign: "left", paddingLeft: 30 }}
                     className={styles.td}

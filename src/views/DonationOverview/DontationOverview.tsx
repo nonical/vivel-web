@@ -107,7 +107,7 @@ export default function DontationOverview() {
           });
         }}
       />
-      <Navbar hospitalName="DZ Hospital" />
+      <Navbar />
       <Main>
         <Title title="Drive Overview">
           <Action
@@ -165,8 +165,12 @@ export default function DontationOverview() {
                         className={styles.tr}
                       >
                         <td className={styles.td}>{x.userName}</td>
-                        <td className={styles.td}>{toDateFormat(x.scheduledAt!)}</td>
-                        <td className={styles.td}>{toTimeFormat(x.scheduledAt!)}</td>
+                        <td className={styles.td}>
+                          {toDateFormat(x.scheduledAt!)}
+                        </td>
+                        <td className={styles.td}>
+                          {toTimeFormat(x.scheduledAt!)}
+                        </td>
                       </tr>
                     ))}
                 </tbody>
@@ -197,8 +201,12 @@ export default function DontationOverview() {
                         }}
                       >
                         <td className={styles.td}>{x.userName}</td>
-                        <td className={styles.td}>{toDateFormat(x.createdAt)}</td>
-                        <td className={styles.td}>{toTimeFormat(x.createdAt)}</td>
+                        <td className={styles.td}>
+                          {toDateFormat(x.createdAt)}
+                        </td>
+                        <td className={styles.td}>
+                          {toTimeFormat(x.createdAt)}
+                        </td>
                       </tr>
                     ))}
                 </tbody>
