@@ -1,11 +1,14 @@
 import { DateTime } from "luxon";
 import { Donation } from "../../interfaces/Donations";
 import { Drive, DriveDetails } from "../../interfaces/Drive";
+import { getDecodedAccessToken } from "../../utils/auth";
 import { ENDPOINTS } from "../../utils/config";
 import fetch from "../../utils/fetch";
 
 export async function fetchDriveById(driveId: string): Promise<DriveDetails> {
-  const res = await fetch(ENDPOINTS.Drives + "/" + driveId + "/details");
+  const hospitalId = getDecodedAccessToken().hospital;
+
+  const res = await fetch(`${ENDPOINTS.Hospitals}/${hospitalId}/drives/${driveId}/details`);
   const json = await res.json();
 
   const drive: DriveDetails = {
@@ -21,7 +24,9 @@ export async function fetchDriveById(driveId: string): Promise<DriveDetails> {
 export async function fetchDriveDonations(
   driveId: string
 ): Promise<Donation[]> {
-  const res = await fetch(ENDPOINTS.Drives + "/" + driveId + "/donations");
+  const hospitalId = getDecodedAccessToken().hospital;
+
+  const res = await fetch(`${ENDPOINTS.Hospitals}/${hospitalId}/drive/${driveId}/donations`);
   const json = await res.json();
 
   const donations: Donation[] = json.results.map((x: any) => ({
@@ -35,7 +40,8 @@ export async function fetchDriveDonations(
 }
 
 export async function closeDrive(drive: Drive) {
-  const res = await fetch(ENDPOINTS.Drives + "/" + drive.driveId, {
+  const hospitalId = getDecodedAccessToken().hospital;
+  const res = await fetch(`${ENDPOINTS.Drives}/${drive.driveId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
