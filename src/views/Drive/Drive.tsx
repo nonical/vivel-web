@@ -9,7 +9,7 @@ import Action from "../../components/Action";
 import Title from "../../components/Title";
 import Main from "../../components/Main";
 import DriveModal from "../../components/Modals/DriveModal";
-import styles from "../DonationOverview/DriveOverview.module.css";
+import styles from "../DriveOverview/DriveOverview.module.css";
 
 import { ReactComponent as PlusCircle } from "../../assets/plus-circle.svg";
 

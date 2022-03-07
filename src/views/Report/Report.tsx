@@ -5,7 +5,7 @@ import Table from "../../components/Table";
 import Action from "../../components/Action";
 import Title from "../../components/Title";
 import Main from "../../components/Main";
-import styles from "../DonationOverview/DriveOverview.module.css";
+import styles from "../DriveOverview/DriveOverview.module.css";
 import { ReactComponent as Printer } from "../../assets/printer.svg";
 import DriveReportModal from "../../components/Modals/DriveReportModal";
 import { fetchDriveReport } from "../../components/Modals/DriveReportModal/actions";
