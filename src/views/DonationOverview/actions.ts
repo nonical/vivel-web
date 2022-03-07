@@ -8,7 +8,7 @@ import fetch from "../../utils/fetch";
 export async function fetchDriveById(driveId: string): Promise<DriveDetails> {
   const hospitalId = getDecodedAccessToken().hospital;
 
-  const res = await fetch(`${ENDPOINTS.Hospitals}/${hospitalId}/drives/${driveId}/details`);
+  const res = await fetch(`${ENDPOINTS.Hospitals}/${hospitalId}/drive/${driveId}/details`);
   const json = await res.json();
 
   const drive: DriveDetails = {
