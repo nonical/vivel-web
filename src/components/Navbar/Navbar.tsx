@@ -7,29 +7,31 @@ import { ReactComponent as PieChart } from "../../assets/pie-chart.svg";
 
 import styles from "./Navbar.module.css";
 import { Link, useLocation } from "react-router-dom";
+import { useQuery } from "react-query";
+import { fetchHospital } from "./actions";
 
-interface NavbarProps {
-  hospitalName: string;
-}
-
-export default function Navbar({ hospitalName }: NavbarProps) {
+export default function Navbar() {
   const location = useLocation();
 
   const currentScreen = (path: string) => {
     return location.pathname.includes(path);
   };
 
+  const { data: hospital } = useQuery(["hospital"], async () => {
+    return fetchHospital();
+  });
+
   return (
     <div className={styles.container}>
       <div className={styles["pill-container"]}>
         <Pill
           backgroundColor="#FF98A8"
-          label={hospitalName}
+          label={hospital?.name!}
           styles={{ marginLeft: 20 }}
         ></Pill>
       </div>
       <div className={styles.actions}>
-        <Link to="/drives" style={{ textDecoration: "none" }}>
+        <Link to="/drives" className={styles.link}>
           <Action
             Icon={Heart}
             iconStyles={{
@@ -39,7 +41,7 @@ export default function Navbar({ hospitalName }: NavbarProps) {
             title={"Drives"}
           />
         </Link>
-        <Link to="/reports" style={{ textDecoration: "none" }}>
+        <Link to="/reports" className={styles.link}>
           <Action
             Icon={PieChart}
             iconStyles={{

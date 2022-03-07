@@ -5,7 +5,7 @@ import { ReactComponent as Settings } from "../../assets/settings.svg";
 import { ReactComponent as XCircle } from "../../assets/x-circle.svg";
 import Action from "../../components/Action";
 import Container from "../../components/Container";
-import DriveOverview from "../../components/DriveOverview";
+import DriveOverviewComponent from "../../components/DriveOverview";
 import Main from "../../components/Main";
 import DriveModal from "../../components/Modals/DriveModal";
 import { putDrive } from "../../components/Modals/DriveModal/actions";
@@ -25,7 +25,7 @@ import {
 } from "./actions";
 import styles from "./DriveOverview.module.css";
 
-export default function DontationOverview() {
+export default function DriveOverview() {
   const [donation, setDonation] = useState<Donation | null>(null);
 
   const [showEditDriveModal, setEditDriveModal] = useState<boolean>(false);
@@ -107,7 +107,7 @@ export default function DontationOverview() {
           });
         }}
       />
-      <Navbar hospitalName="DZ Hospital" />
+      <Navbar />
       <Main>
         <Title title="Drive Overview">
           <Action
@@ -132,7 +132,7 @@ export default function DontationOverview() {
           />
         </Title>
         <Container>
-          <DriveOverview
+          <DriveOverviewComponent
             bloodType={drive.bloodType}
             date={toDateFormat(drive.date)}
             litresToGo={parseFloat((drive.amountLeft / 1000).toFixed(2))}
@@ -165,8 +165,12 @@ export default function DontationOverview() {
                         className={styles.tr}
                       >
                         <td className={styles.td}>{x.userName}</td>
-                        <td className={styles.td}>{toDateFormat(x.scheduledAt!)}</td>
-                        <td className={styles.td}>{toTimeFormat(x.scheduledAt!)}</td>
+                        <td className={styles.td}>
+                          {toDateFormat(x.scheduledAt!)}
+                        </td>
+                        <td className={styles.td}>
+                          {toTimeFormat(x.scheduledAt!)}
+                        </td>
                       </tr>
                     ))}
                 </tbody>
@@ -197,8 +201,12 @@ export default function DontationOverview() {
                         }}
                       >
                         <td className={styles.td}>{x.userName}</td>
-                        <td className={styles.td}>{toDateFormat(x.createdAt)}</td>
-                        <td className={styles.td}>{toTimeFormat(x.createdAt)}</td>
+                        <td className={styles.td}>
+                          {toDateFormat(x.createdAt)}
+                        </td>
+                        <td className={styles.td}>
+                          {toTimeFormat(x.createdAt)}
+                        </td>
                       </tr>
                     ))}
                 </tbody>

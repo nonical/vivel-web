@@ -1,3 +1,4 @@
+import { getDecodedAccessToken } from "../../../utils/auth";
 import { ENDPOINTS } from "../../../utils/config";
 import fetch from "../../../utils/fetch";
 
@@ -14,7 +15,7 @@ const formDataToDrive = (formData: FormData) => {
   const body: Drive = {
     status: formData.get("status") as string,
     bloodType: formData.get("bloodType") as string,
-    hospitalId: formData.get("hospitalId") as string,
+    hospitalId: getDecodedAccessToken().hospital,
     date: formData.get("date") as string,
     amount: parseInt(formData.get("amount") as string),
     urgency: (formData.get("urgency") as string) == "true",
@@ -44,8 +45,9 @@ export async function putDrive(
   driveId?: string
 ): Promise<Drive> {
   const body = formDataToDrive(formData);
+  const hospitalId = getDecodedAccessToken().hospital;
 
-  const res = await fetch(ENDPOINTS.Drives + `/${driveId}`, {
+  const res = await fetch(`${ENDPOINTS.Drives}/${driveId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

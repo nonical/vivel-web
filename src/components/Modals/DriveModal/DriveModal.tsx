@@ -68,14 +68,6 @@ export default function DriveModal(props: DriveModalProps) {
           value={"Open"}
           readOnly={true}
         />
-        <input
-          type="text"
-          hidden={true}
-          id={"hospitalId"}
-          name={"hospitalId"}
-          value={""}
-          readOnly={true}
-        />
         <div className={modalStyles["input-container"]}>
           <Input
             label={"Blood amount"}

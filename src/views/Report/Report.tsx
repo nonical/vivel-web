@@ -5,7 +5,7 @@ import Table from "../../components/Table";
 import Action from "../../components/Action";
 import Title from "../../components/Title";
 import Main from "../../components/Main";
-import styles from "../DonationOverview/DriveOverview.module.css";
+import styles from "../DriveOverview/DriveOverview.module.css";
 import { ReactComponent as Printer } from "../../assets/printer.svg";
 import DriveReportModal from "../../components/Modals/DriveReportModal";
 import { fetchDriveReport } from "../../components/Modals/DriveReportModal/actions";
@@ -36,7 +36,7 @@ export default function Report() {
           setBloodTypeModal(false);
         }}
       />
-      <Navbar hospitalName="DZ Hospital" />
+      <Navbar />
       <Main>
         <Title title={"Reports"} />
         <Container>
@@ -68,7 +68,10 @@ export default function Report() {
                     />
                   </td>
                 </tr>
-                <tr className={styles.tr} onClick={() => setBloodTypeModal(true)}>
+                <tr
+                  className={styles.tr}
+                  onClick={() => setBloodTypeModal(true)}
+                >
                   <td
                     style={{ textAlign: "left", paddingLeft: 30 }}
                     className={styles.td}

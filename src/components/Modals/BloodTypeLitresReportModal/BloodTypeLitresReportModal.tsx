@@ -10,46 +10,46 @@ import { DateTime } from "luxon";
 
 import { displayErrors } from "../../../utils/toast";
 
-
 interface BloodTypeLitresReportModalProps {
   title: string;
   buttonLabel: string;
   isOpen: boolean;
   onClose: () => void;
-  mutationMethod: (body: FormData, hospitalId: string) => {};
+  mutationMethod: (body: FormData) => {};
 }
 
 const urgencyStatuses = [
-    {value: "All", label: "All"},
-    {value: "Routine", label: "Routine"},
-    {value: "Urgent", label: "Urgent"}
-]
+  { value: "All", label: "All" },
+  { value: "Routine", label: "Routine" },
+  { value: "Urgent", label: "Urgent" },
+];
 
-export default function BloodTypeLitresReportModal(props: BloodTypeLitresReportModalProps) {
-      const [urgencyStatus, setUrgencyStatus] = React.useState<string | undefined>(
-        urgencyStatuses[0].value
-      );
+export default function BloodTypeLitresReportModal(
+  props: BloodTypeLitresReportModalProps
+) {
+  const [urgencyStatus, setUrgencyStatus] = React.useState<string | undefined>(
+    urgencyStatuses[0].value
+  );
 
-      const mutation = useMutation(async ({ formData, hospitalId }: any) => {
-        await props.mutationMethod(formData, hospitalId);
-      });
+  const mutation = useMutation(async ({ formData }: any) => {
+    await props.mutationMethod(formData);
+  });
 
-      const handleSubmit = async (e: any) => {
-        e.preventDefault();
-        const data = new FormData(e.target.form);
-        await mutation.mutateAsync(
-          // TODO: add hospitalID
-          { formData: data, hospitalId: "" },
-          {
-            onSuccess: () => {
-              props.onClose();
-            },
-            onError: (error: any) => {
-              displayErrors(error);
-            },
-          }
-        );
-      };
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const data = new FormData(e.target.form);
+    await mutation.mutateAsync(
+      { formData: data },
+      {
+        onSuccess: () => {
+          props.onClose();
+        },
+        onError: (error: any) => {
+          displayErrors(error);
+        },
+      }
+    );
+  };
 
   return (
     <Modal {...props}>
