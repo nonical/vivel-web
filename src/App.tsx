@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Protected from "./components/Protected";
 import { AuthProvider } from "./contexts/Auth";
 import { Login, Redirect, Refresh } from "./views/Auth";
-import DonationOverview from "./views/DonationOverview";
+import DonationOverview from "./views/DriveOverview";
 import Drive from "./views/Drive";
 import Report from "./views/Report/Report";
 
