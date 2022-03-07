@@ -7,8 +7,7 @@ export interface Hospital {
 }
 
 export async function fetchHospital(): Promise<Hospital> {
-  const res = await fetch(
-    ENDPOINTS.Hospitals + `/${getDecodedAccessToken().hospital}`
+  const res = await fetch(`${ENDPOINTS.Hospitals}/${getDecodedAccessToken().hospital}`
   );
   const hospital: Hospital = await res.json();
 
