@@ -8,7 +8,7 @@ import fetch from "../../utils/fetch";
 export async function fetchDriveById(driveId: string): Promise<DriveDetails> {
   const hospitalId = getDecodedAccessToken().hospital;
 
-  const res = await fetch(`${ENDPOINTS.Hospitals}/${hospitalId}/drive/${driveId}/details`);
+  const res = await fetch(`${ENDPOINTS.Drives}/${driveId}/details`);
   const json = await res.json();
 
   const drive: DriveDetails = {
@@ -26,7 +26,7 @@ export async function fetchDriveDonations(
 ): Promise<Donation[]> {
   const hospitalId = getDecodedAccessToken().hospital;
 
-  const res = await fetch(`${ENDPOINTS.Hospitals}/${hospitalId}/drive/${driveId}/donations`);
+  const res = await fetch(`${ENDPOINTS.Drives}/${driveId}/donations`);
   const json = await res.json();
 
   const donations: Donation[] = json.results.map((x: any) => ({
@@ -41,7 +41,7 @@ export async function fetchDriveDonations(
 
 export async function closeDrive(drive: Drive) {
   const hospitalId = getDecodedAccessToken().hospital;
-  const res = await fetch(`${ENDPOINTS.Hospitals}/${hospitalId}/drive/${drive.driveId}`, {
+  const res = await fetch(`${ENDPOINTS.Drives}/${drive.driveId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export async function closeDrive(drive: Drive) {
 export async function updateDonation(donation: Donation) {
   const hospitalId = getDecodedAccessToken().hospital;
 
-  const res = await fetch(`${ENDPOINTS.Hospitals}/${hospitalId}/donation/${donation.donationId}`, {
+  const res = await fetch(`${ENDPOINTS.Donations}/${donation.donationId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

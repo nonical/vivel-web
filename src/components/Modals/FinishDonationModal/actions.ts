@@ -35,7 +35,7 @@ export async function putDonation(
   const body = formDataToDonation(formData);
   const hospitalId = getDecodedAccessToken().hospital;
 
-  const res = await fetch(`${ENDPOINTS.Hospitals}/${hospitalId}/donation/${donationId}`, {
+  const res = await fetch(`${ENDPOINTS.Donations}/${donationId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
