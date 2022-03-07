@@ -41,7 +41,7 @@ export async function fetchDriveDonations(
 
 export async function closeDrive(drive: Drive) {
   const hospitalId = getDecodedAccessToken().hospital;
-  const res = await fetch(`${ENDPOINTS.Drives}/${drive.driveId}`, {
+  const res = await fetch(`${ENDPOINTS.Hospitals}/${hospitalId}/drive/${drive.driveId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -59,7 +59,9 @@ export async function closeDrive(drive: Drive) {
 
 // TODO: Update other actions to use this action (updating donations in scheduled donations list)
 export async function updateDonation(donation: Donation) {
-  const res = await fetch(ENDPOINTS.Donations + "/" + donation.donationId, {
+  const hospitalId = getDecodedAccessToken().hospital;
+
+  const res = await fetch(`${ENDPOINTS.Hospitals}/${hospitalId}/donation/${donation.donationId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

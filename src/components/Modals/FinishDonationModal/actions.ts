@@ -1,3 +1,4 @@
+import { getDecodedAccessToken } from "../../../utils/auth";
 import { ENDPOINTS } from "../../../utils/config";
 import fetch from "../../../utils/fetch";
 
@@ -32,8 +33,9 @@ export async function putDonation(
   donationId?: string
 ): Promise<Donation> {
   const body = formDataToDonation(formData);
+  const hospitalId = getDecodedAccessToken().hospital;
 
-  const res = await fetch(ENDPOINTS.Donations + `/${donationId}`, {
+  const res = await fetch(`${ENDPOINTS.Hospitals}/${hospitalId}/donation/${donationId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

@@ -45,8 +45,9 @@ export async function putDrive(
   driveId?: string
 ): Promise<Drive> {
   const body = formDataToDrive(formData);
+  const hospitalId = getDecodedAccessToken().hospital;
 
-  const res = await fetch(ENDPOINTS.Drives + `/${driveId}`, {
+  const res = await fetch(`${ENDPOINTS.Hospitals}/${hospitalId}/drive/${driveId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
