@@ -110,26 +110,30 @@ export default function DriveOverview() {
       <Navbar />
       <Main>
         <Title title="Drive Overview">
-          <Action
-            title="Edit"
-            Icon={Settings}
-            iconStyles={{ stroke: "white", marginLeft: 5, marginRight: 5 }}
-            onClick={() => {
-              setEditDriveModal(!showEditDriveModal);
-            }}
-          />
-          <Action
-            title="Close"
-            Icon={XCircle}
-            iconStyles={{ stroke: "white", marginLeft: 5, marginRight: 5 }}
-            onClick={async () => {
-              if (
-                window.confirm("Are you sure you want to close this drive?")
-              ) {
-                closeDriveMutation.mutate(drive);
-              }
-            }}
-          />
+          {drive?.status != "Closed" &&
+            <>
+              <Action
+                title="Edit"
+                Icon={Settings}
+                iconStyles={{ stroke: "white", marginLeft: 5, marginRight: 5 }}
+                onClick={() => {
+                  setEditDriveModal(!showEditDriveModal);
+                }}
+              />
+              <Action
+                title="Close"
+                Icon={XCircle}
+                iconStyles={{ stroke: "white", marginLeft: 5, marginRight: 5 }}
+                onClick={async () => {
+                  if (
+                    window.confirm("Are you sure you want to close this drive?")
+                  ) {
+                    closeDriveMutation.mutate(drive);
+                  }
+                }}
+              />
+            </>
+          }
         </Title>
         <Container>
           <DriveOverviewComponent
@@ -140,80 +144,94 @@ export default function DriveOverview() {
             scheduledCount={drive.scheduledCount}
           />
         </Container>
-        <div className={styles.donations}>
-          <div className={styles.fill}>
-            <h1>Scheduled</h1>
-            <Container>
-              <Table>
-                <thead>
-                  <tr>
-                    <th>User</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {donations
-                    .filter((x) => x.status === "Scheduled")
-                    .map((x) => (
-                      <tr
-                        key={x.userId}
-                        onClick={() => {
-                          setDonation(x);
-                          setResolveDonationModal(!showResolveDonationModal);
-                        }}
-                        className={styles.tr}
-                      >
-                        <td className={styles.td}>{x.userName}</td>
-                        <td className={styles.td}>
-                          {toDateFormat(x.scheduledAt!)}
-                        </td>
-                        <td className={styles.td}>
-                          {toTimeFormat(x.scheduledAt!)}
-                        </td>
+        {drive?.status != "Closed" &&
+          <div className={styles.donations}>
+            <div className={styles.fill}>
+              <h1>Scheduled</h1>
+              <Container>
+                <Table>
+                  <thead>
+                    <tr>
+                      <th>User</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {donations
+                      .filter((x) => x.status === "Scheduled").length == 0 &&
+                      <tr className={styles.tr}>
+                        <td colSpan={3} className={styles.td}>No scheduled requests</td>
                       </tr>
-                    ))}
-                </tbody>
-              </Table>
-            </Container>
-          </div>
-          <div className={styles.fill}>
-            <h1>Pending</h1>
-            <Container>
-              <Table>
-                <thead>
-                  <tr>
-                    <th>User</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {donations
-                    .filter((x) => x.status === "Pending")
-                    .map((x) => (
-                      <tr
-                        key={x.userId}
-                        className={styles.tr}
-                        onClick={() => {
-                          setDonation(x);
-                          setShowScheduleDonationModal(true);
-                        }}
-                      >
-                        <td className={styles.td}>{x.userName}</td>
-                        <td className={styles.td}>
-                          {toDateFormat(x.createdAt)}
-                        </td>
-                        <td className={styles.td}>
-                          {toTimeFormat(x.createdAt)}
-                        </td>
+                    }
+                    {donations
+                      .filter((x) => x.status === "Scheduled")
+                      .map((x) => (
+                        <tr
+                          key={x.userId}
+                          onClick={() => {
+                            setDonation(x);
+                            setResolveDonationModal(!showResolveDonationModal);
+                          }}
+                          className={styles.tr}
+                        >
+                          <td className={styles.td}>{x.userName}</td>
+                          <td className={styles.td}>
+                            {toDateFormat(x.scheduledAt!)}
+                          </td>
+                          <td className={styles.td}>
+                            {toTimeFormat(x.scheduledAt!)}
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </Table>
+              </Container>
+            </div>
+            <div className={styles.fill}>
+              <h1>Pending</h1>
+              <Container>
+                <Table>
+                  <thead>
+                    <tr>
+                      <th>User</th>
+                      <th>Date</th>
+                      <th>Time</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {donations
+                      .filter((x) => x.status === "Pending").length == 0 &&
+                      <tr className={styles.tr}>
+                        <td colSpan={3} className={styles.td}>No pending requests</td>
                       </tr>
-                    ))}
-                </tbody>
-              </Table>
-            </Container>
+                    }
+                    {donations
+                      .filter((x) => x.status === "Pending")
+                      .map((x) => (
+                        <tr
+                          key={x.userId}
+                          className={styles.tr}
+                          onClick={() => {
+                            setDonation(x);
+                            setShowScheduleDonationModal(true);
+                          }}
+                        >
+                          <td className={styles.td}>{x.userName}</td>
+                          <td className={styles.td}>
+                            {toDateFormat(x.createdAt)}
+                          </td>
+                          <td className={styles.td}>
+                            {toTimeFormat(x.createdAt)}
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </Table>
+              </Container>
+            </div>
           </div>
-        </div>
+        }
       </Main>
     </>
   );
