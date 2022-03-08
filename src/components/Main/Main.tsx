@@ -15,7 +15,7 @@ export default function Main({ children }: MainProps) {
         style={{
           marginLeft: "15%",
           marginRight: "15%",
-          height: "100vh",
+          minHeight: "100vh",
         }}
       >
         {children}
