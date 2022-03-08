@@ -1,6 +1,7 @@
 import { getDecodedAccessToken } from "../../../utils/auth";
 import { ENDPOINTS } from "../../../utils/config";
 import fetch from "../../../utils/fetch";
+import { displaySuccess } from "../../../utils/toast";
 
 export interface LitresByBloodTypeReport {
   from: string;
@@ -25,6 +26,8 @@ const formDataToQueryString = (formData: FormData) => {
 export async function fetchBloodTypeLitresReport(formData: FormData) {
   let queryString = formDataToQueryString(formData);
   const hospitalId = getDecodedAccessToken().hospital;
+
+  displaySuccess("Generating report...");
 
   const res = await fetch(
     ENDPOINTS.Hospitals +
