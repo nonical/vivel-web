@@ -45,9 +45,7 @@ export default function Report() {
               <thead>
                 <tr>
                   <th style={{ textAlign: "left", paddingLeft: 30 }}>Name</th>
-                  <th style={{ textAlign: "right", paddingRight: 30 }}>
-                    Action
-                  </th>
+                  <th style={{ textAlign: "right", paddingRight: 30 }}></th>
                 </tr>
               </thead>
               <tbody>
