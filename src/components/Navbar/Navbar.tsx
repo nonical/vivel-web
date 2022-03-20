@@ -1,17 +1,17 @@
 import React from "react";
-import Pill from "../Pill";
-import Action from "../Action";
-
+import { useQuery } from "react-query";
+import { Link, useLocation } from "react-router-dom";
 import { ReactComponent as Heart } from "../../assets/heart.svg";
 import { ReactComponent as PieChart } from "../../assets/pie-chart.svg";
-
-import styles from "./Navbar.module.css";
-import { Link, useLocation } from "react-router-dom";
-import { useQuery } from "react-query";
+import { useAuth } from "../../contexts/Auth";
+import Action from "../Action";
+import Pill from "../Pill";
 import { fetchHospital } from "./actions";
+import styles from "./Navbar.module.css";
 
 export default function Navbar() {
   const location = useLocation();
+  const { logout } = useAuth();
 
   const currentScreen = (path: string) => {
     return location.pathname.includes(path);
@@ -51,6 +51,11 @@ export default function Navbar() {
             title={"Reports"}
           />
         </Link>
+      </div>
+      <div className={styles.logout}>
+        <p style={{ cursor: "pointer" }} onClick={logout}>
+          Log out
+        </p>
       </div>
     </div>
   );
