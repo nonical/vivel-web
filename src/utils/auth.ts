@@ -119,3 +119,13 @@ export function getTokens() {
 export function getDecodedAccessToken(): any {
   return jwtDecode(localStorage.getItem("accessToken")!);
 }
+
+export function deleteTokens() {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  localStorage.removeItem("idToken");
+}
+
+export function logoutRedirect() {
+  window.location.href = `${IDENTITY}/Account/Logout`;
+}

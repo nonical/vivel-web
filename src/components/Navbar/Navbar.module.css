@@ -3,17 +3,27 @@
   height: 80px;
   background-color: white;
   align-items: center;
+  justify-content: space-between;
 }
 
 .pill-container {
-  width: 33%;
+  display: flex;
+  flex: 1;
 }
 
 .actions {
   display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
-  width: 33%;
+}
+
+.logout {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: flex-end;
+  padding-right: 20px;
 }
 
 .link {
