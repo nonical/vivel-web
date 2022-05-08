@@ -1,5 +1,9 @@
 # Vivel web application
 
+Required node version
+
+`v16.13.2`
+
 ## Available Scripts
 
 In the project directory, you can run:
